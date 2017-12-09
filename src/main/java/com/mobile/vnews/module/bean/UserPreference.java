@@ -1,4 +1,4 @@
-package com.mobine.vnews.module.bean;
+package com.mobile.vnews.module.bean;
 
 import java.util.List;
 

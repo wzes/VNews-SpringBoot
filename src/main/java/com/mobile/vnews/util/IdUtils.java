@@ -1,4 +1,4 @@
-package com.mobine.vnews.util;
+package com.mobile.vnews.util;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package com.mobine.vnews.module;
+package com.mobile.vnews.module;
 
 import com.alibaba.fastjson.JSONObject;
 

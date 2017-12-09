@@ -1,4 +1,4 @@
-package com.mobine.vnews;
+package com.mobile.vnews;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

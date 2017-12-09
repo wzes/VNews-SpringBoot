@@ -1,11 +1,11 @@
-package com.mobine.vnews.service;
+package com.mobile.vnews.service;
 
 
-import com.mobine.vnews.mapper.UserMapper;
-import com.mobine.vnews.module.BasicResponse;
-import com.mobine.vnews.module.bean.User;
+import com.mobile.vnews.mapper.UserMapper;
+import com.mobile.vnews.module.BasicResponse;
+import com.mobile.vnews.module.bean.User;
+import com.mobile.vnews.util.IdUtils;
 
-import com.mobine.vnews.util.IdUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

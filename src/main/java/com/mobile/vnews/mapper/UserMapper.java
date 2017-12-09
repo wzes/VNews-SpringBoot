@@ -1,6 +1,6 @@
-package com.mobine.vnews.mapper;
+package com.mobile.vnews.mapper;
 
-import com.mobine.vnews.module.bean.User;
+import com.mobile.vnews.module.bean.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

@@ -70,7 +70,7 @@ public class UserService {
         try {
             User res = userMapper.findUserByUsername(username, password);
             if (res == null) {
-                code = 400;
+                code = 403;
                 message = "login false";
             }
             response.setContent(res);
@@ -93,14 +93,14 @@ public class UserService {
      */
     public BasicResponse<String> checkPhone(String telephone) {
         BasicResponse<String> response = new BasicResponse<>();
-        int code = 400;
-        String message = "telephone has been used";
+        int code = 200;
+        String message = "telephone available";
         String content = null;
         try {
             int res = userMapper.checkTelephone(telephone);
             if(res > 0) {
-                code = 200;
-                message = "telephone available";
+                code = 403;
+                message = "telephone not available";
                 content = "false";
             } else {
                 content = "true";

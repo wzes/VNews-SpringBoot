@@ -62,17 +62,17 @@ public class UserService {
      * @param username
      * @return
      */
-    public BasicResponse<String> login(String username) {
-        BasicResponse<String> response = new BasicResponse<>();
+    public BasicResponse<User> login(String username, String password) {
+        BasicResponse<User> response = new BasicResponse<>();
         int code = 200;
         String message = "login success";
         try {
-            User res = userMapper.findUserByUsername(username);
-            response.setContent("");
+            User res = userMapper.findUserByUsername(username, password);
+            response.setContent(res);
             log.info(res);
         } catch (Exception e) {
             code = 500;
-            response.setContent("");
+            response.setContent(null);
             message = "login fail";
         }
         response.setCode(code);

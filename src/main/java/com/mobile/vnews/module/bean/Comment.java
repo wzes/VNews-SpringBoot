@@ -30,9 +30,10 @@ public class Comment {
      * after
      */
     private int likeCount;
-    private String userID;
-    private String image;
-    private String username;
+    private String fromImage;
+    private String fromUsername;
+    private String toImage;
+    private String toUsername;
 
     public int getLikeCount() {
         return likeCount;
@@ -42,30 +43,37 @@ public class Comment {
         this.likeCount = likeCount;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getFromImage() {
+        return fromImage;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setFromImage(String fromImage) {
+        this.fromImage = fromImage;
     }
 
-    public String getImage() {
-        return image;
+    public String getFromUsername() {
+        return fromUsername;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setFromUsername(String fromUsername) {
+        this.fromUsername = fromUsername;
     }
 
-    public String getUsername() {
-        return username;
+    public String getToImage() {
+        return toImage;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setToImage(String toImage) {
+        this.toImage = toImage;
     }
 
+    public String getToUsername() {
+        return toUsername;
+    }
+
+    public void setToUsername(String toUsername) {
+        this.toUsername = toUsername;
+    }
     /*---------------------------------------------------------------*/
 
     public int getFloor() {

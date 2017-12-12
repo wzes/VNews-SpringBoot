@@ -11,6 +11,17 @@ import java.util.List;
 @Mapper
 public interface UserPreferenceMapper {
 
+
+    /**
+     *
+     * @param typeName
+     * @return
+     */
+    @Select("SELECT ID\n" +
+            "FROM type\n" +
+            "WHERE name = #{typeName}")
+    int getTypeIDByName(String typeName);
+
     /**
      *
      * @param userID
@@ -29,6 +40,8 @@ public interface UserPreferenceMapper {
             " FROM user_preference NATURAL JOIN user, type\n" +
             " WHERE user.ID = #{userID} AND typeID = type.ID")
     List<String> getUserPreference(String userID);
+
+
 
     /**
      * Update

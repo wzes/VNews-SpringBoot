@@ -12,6 +12,10 @@ import java.util.List;
 @Mapper
 public  interface NewsMapper {
 
+    /**
+     * Add likeCount and viewCount
+     * @return
+     */
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
@@ -26,6 +30,11 @@ public  interface NewsMapper {
             "  FROM news WHERE type = #{type}")
     List<News> getNewsByType(String type);
 
+    /**
+     * Add likeCount and viewCount
+     * @param count
+     * @return
+     */
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  ((SELECT count(newsID) FROM like_news WHERE newsID = news.ID) + \n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) +  \n" +
@@ -33,6 +42,11 @@ public  interface NewsMapper {
             "  FROM news ORDER BY rank DESC limit #{count}")
     List<News> getHotNews(int count);
 
+    /**
+     * Add likeCount and viewCount
+     * @param ID
+     * @return
+     */
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
@@ -40,6 +54,11 @@ public  interface NewsMapper {
             "  FROM news WHERE ID = #{ID}")
     News getNewsByID(int ID);
 
+    /**
+     * Add likeCount and viewCount
+     * @param userID
+     * @return
+     */
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
@@ -59,6 +78,11 @@ public  interface NewsMapper {
     @Insert("INSERT INTO view_news (userID, newsID) VALUES (#{userID}, #{newsID})")
     void addViewNews(String userID, int newsID);
 
+    /**
+     * Add likeCount and viewCount
+     * @param userID
+     * @return
+     */
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +

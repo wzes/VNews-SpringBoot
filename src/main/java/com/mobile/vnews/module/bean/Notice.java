@@ -23,6 +23,41 @@ public class Notice {
     private String content;
     private Timestamp timestamp;
 
+    /**
+     *  add after
+     */
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private String fromImage;
+    private String fromUsername;
+
+    public String getFromImage() {
+        return fromImage;
+    }
+
+    public void setFromImage(String fromImage) {
+        this.fromImage = fromImage;
+    }
+
+    public String getFromUsername() {
+        return fromUsername;
+    }
+
+    public void setFromUsername(String fromUsername) {
+        this.fromUsername = fromUsername;
+    }
+
+
+    /* --------------------------------------------- */
+
     public int getID() {
         return ID;
     }

@@ -11,32 +11,32 @@ import java.util.List;
 @Mapper
 public interface CommentMapper {
 
-
     /**
      * Only return main floor
      * @param newsID
      * @return
      */
-    @Select("SELECT comment.ID, fromID, toID, content, timestamp, newsID, floor, user.username, " +
-            "user.image, user.ID,\n" +
-            "(SELECT count(*) FROM like_comment WHERE commentID = comment.ID) as likeCount\n" +
-            "FROM comment, user\n" +
-            "WHERE user.ID = comment.fromID AND newsID = #{newsID} AND (toID IS NULL OR toID = '') " +
-            "ORDER BY floor ASC;")
-    List<Comment>getComment(int newsID);
+    @Select("SELECT comment.ID, fromID, fromUser.image as fromImage, fromUser.username as fromUsername,\n" +
+            "  content, timestamp, newsID, floor,\n" +
+            "  (SELECT count(*) FROM like_comment WHERE commentID = comment.ID) as likeCount\n" +
+            "FROM comment, user as fromUser\n" +
+            "WHERE fromUser.ID = comment.fromID AND newsID = #{newsID} " +
+            "AND (toID IS NULL OR toID = '') ORDER BY floor ASC")
+    List<Comment>getCommentByNewsID(int newsID);
 
     /**
      * Get comments from one floor
      * @param floor
      * @return
      */
-    @Select("SELECT comment.ID, fromID, toID, content, timestamp, newsID, floor, user.username, " +
-            "user.image, user.ID,\n" +
+    @Select("SELECT comment.ID, fromID, fromUser.image as fromImage, fromUser.username as fromUsername,\n" +
+            "  toID, toUser.image as toImage, toUser.username as toUsername,\n" +
+            "  content, timestamp, newsID, floor,\n" +
             "  (SELECT count(*) FROM like_comment WHERE commentID = comment.ID) as likeCount\n" +
-            "FROM comment, user\n" +
-            "WHERE user.ID = comment.fromID AND newsID = #{newsID} AND floor = #{floor} " +
-            "ORDER BY timestamp ASC;")
-    List<Comment>getCommentByFloor(int newsID, int floor);
+            "FROM comment, user as fromUser, user as toUser\n" +
+            "WHERE fromUser.ID = comment.fromID AND toUser.ID = comment.toID AND newsID = #{newsID}" +
+            " AND floor = #{floor} ORDER BY timestamp ASC")
+    List<Comment>getCommentByNewsIDAndFloor(int newsID, int floor);
 
     // TODO
     @Insert("INSERT INTO like_comment (userID, commentID) VALUES (#{userID}, #{commentID})")

@@ -21,41 +21,37 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public BasicResponse<String> register(@RequestParam String username, @RequestParam String password,
+    public BasicResponse<String> register(@RequestParam String username,
+                                          @RequestParam String password,
                                           @RequestParam String telephone){
         User user = new User(username, password, telephone);
         return userService.register(user);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public BasicResponse<String> login(@RequestParam String username, @RequestParam String password){
-        User user = new User(username,password);
-        return userService.login(user);
+    public BasicResponse<User> login(@RequestParam String username,
+                                       @RequestParam String password){
+        return userService.login(username, password);
     }
 
     @RequestMapping(value = "/user/tel/{telephone}", method = RequestMethod.GET)
     public BasicResponse<String> checkPhone(@PathVariable("telephone") String telephone){
-        User user = new User(telephone);
-        return userService.checkPhone(user);
+        return userService.checkPhone(telephone);
     }
 
-    @RequestMapping(value = "/user/{username}", method = RequestMethod.PUT)
-    public BasicResponse<String>updateUser(@PathVariable("username")String username, @RequestBody User user){
-        user.setUsername(username);
+    @RequestMapping(value = "/user", method = RequestMethod.PUT)
+    public BasicResponse<String>updateUser(@RequestBody User user){
         return userService.updateUser(user);
     }
 
-    @RequestMapping(value = "/user/{username}/image", method = RequestMethod.POST)
-    public BasicResponse<String>updatePhoto(@PathVariable("username")String username, @RequestParam("photo") MultipartFile file){
-        User user = new User();
-        user.setUsername(username);
-        return userService.updatePhoto(user,file);
+    @RequestMapping(value = "/user/{ID}/image", method = RequestMethod.POST)
+    public BasicResponse<String>updatePhoto(@PathVariable("ID")String ID,
+                                            @RequestParam("photo") MultipartFile file){
+        return userService.updatePhoto(ID, file);
     }
 
-    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
-    public BasicResponse<User>getUser(@PathVariable("username") String username){
-        User user = new User();
-        user.setUsername(username);
-        return userService.getUser(user);
+    @RequestMapping(value = "/user/{ID}", method = RequestMethod.GET)
+    public BasicResponse<User>getUser(@PathVariable("ID") String ID){
+        return userService.getUser(ID);
     }
 }

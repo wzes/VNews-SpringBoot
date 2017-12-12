@@ -12,23 +12,56 @@ import java.util.List;
 @Mapper
 public  interface NewsMapper {
 
+
     /**
      * Add likeCount and viewCount
+     * @param start
+     * @param count
      * @return
      */
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
-            "  FROM news;")
-    List<News> getAllNews();
+            "  FROM news limit #{start}, #{count}")
+    List<News> getNews(int start, int count);
 
+    /**
+     * Add likeCount and viewCount
+     *
+     * @return
+     */
+    @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
+            "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
+            "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
+            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
+            "  FROM news")
+    List<News> getAllNews();
+    /**
+     *
+     * @param type
+     * @return
+     */
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
             "  FROM news WHERE type = #{type}")
-    List<News> getNewsByType(String type);
+    List<News> getAllNewsByType(String type);
+
+    /**
+     *
+     * @param type
+     * @param start
+     * @param count
+     * @return
+     */
+    @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
+            "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
+            "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
+            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
+            "  FROM news WHERE type = #{type} limit #{start}, #{count}")
+    List<News> getNewsByType(String type, int start, int count);
 
     /**
      * Add likeCount and viewCount

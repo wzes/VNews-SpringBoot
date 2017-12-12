@@ -26,6 +26,7 @@ public class UserService {
 
     @Autowired
     UserMapper userMapper;
+
     /**
      * log output
      */

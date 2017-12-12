@@ -13,19 +13,28 @@ import java.util.List;
 @Mapper
 public interface NoticeMapper {
 
+
     /**
+     * TODO
      * Get notice of user
      * @param userID
      * @return
      */
     @Select("SELECT notice.ID, notice.fromID, fromUser.username AS fromUsername, fromUser.image AS fromImage,\n" +
-            "  notice.toID, news.title, notice.timestamp, notice.content, newsID\n" +
+            "notice.timestamp, notice.content, news.title, notice.toID\n" +
             "FROM notice, news, user as fromUser\n" +
-            "WHERE news.ID = notice.newsID AND notice.fromID = #{userID}\n" +
-            " AND fromUser.ID = notice.fromID ORDER BY timestamp DESC")
+            "WHERE news.ID = notice.newsID AND fromUser.ID = notice.fromID AND\n" +
+            "notice.newsID IN (SELECT newsID FROM comment\n" +
+            "WHERE comment.fromID = #{userID} OR comment.toID = #{userID})\n" +
+            "ORDER BY timestamp DESC")
     List<Notice> getNoticesByUserID(String userID);
 
+    /**
+     * delete it by submit people
+     * @param ID
+     * @param fromID
+     */
+    @Delete("DELETE FROM notice WHERE ID = #{ID} AND fromID = #{fromID}")
+    void deleteNoticeByID(int ID, String fromID);
 
-    @Delete("DELETE FROM notice WHERE ID = #{ID}")
-    void deleteNoticeByID(int ID);
 }

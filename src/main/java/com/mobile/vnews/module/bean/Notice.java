@@ -8,7 +8,7 @@ import java.security.Timestamp;
 
 public class Notice {
     /**
-     *  ID        INT AUTO_INCREMENT
+     * ID        INT AUTO_INCREMENT
      * PRIMARY KEY,
      * newsID    INT                                 NULL,
      * fromID    VARCHAR(20)                         NULL,
@@ -27,6 +27,21 @@ public class Notice {
      *  add after
      */
     private String title;
+    private String fromImage;
+    private String fromUsername;
+
+//    /**
+//     * Relation user for submitting
+//     */
+//    private String relationID;
+//
+//    public String getRelationID() {
+//        return relationID;
+//    }
+//
+//    public void setRelationID(String relationID) {
+//        this.relationID = relationID;
+//    }
 
     public String getTitle() {
         return title;
@@ -35,9 +50,6 @@ public class Notice {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    private String fromImage;
-    private String fromUsername;
 
     public String getFromImage() {
         return fromImage;
@@ -54,7 +66,6 @@ public class Notice {
     public void setFromUsername(String fromUsername) {
         this.fromUsername = fromUsername;
     }
-
 
     /* --------------------------------------------- */
 

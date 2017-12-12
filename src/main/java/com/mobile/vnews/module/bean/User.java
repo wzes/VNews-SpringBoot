@@ -19,6 +19,38 @@ public class User {
     private String motto;
     private String info;
 
+    /*--------------------*/
+    private int likeNewsCount;
+    private int viewNewsCount;
+
+    public int getLikeNewsCount() {
+        return likeNewsCount;
+    }
+
+    public void setLikeNewsCount(int likeNewsCount) {
+        this.likeNewsCount = likeNewsCount;
+    }
+
+    public int getViewNewsCount() {
+        return viewNewsCount;
+    }
+
+    public void setViewNewsCount(int viewNewsCount) {
+        this.viewNewsCount = viewNewsCount;
+    }
+    /*--------------------*/
+    public User() {
+    }
+
+    public User(String username,String password){
+        this.username=username;
+        this.password=password;
+    }
+
+    public User(String telephone){
+        this.telephone=telephone;
+    }
+
     public User(String username, String password, String telephone) {
         this.username = username;
         this.password = password;

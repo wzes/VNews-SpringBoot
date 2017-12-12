@@ -25,6 +25,49 @@ public class Comment {
     private Timestamp timestamp;
     private int newID;
 
+    /*---------------------------------------------------------------*/
+    /**
+     * after
+     */
+    private int likeCount;
+    private String userID;
+    private String image;
+    private String username;
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /*---------------------------------------------------------------*/
+
     public int getFloor() {
         return floor;
     }

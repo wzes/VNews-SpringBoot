@@ -4,10 +4,8 @@ import com.mobile.vnews.module.BasicResponse;
 import com.mobile.vnews.module.bean.User;
 import com.mobile.vnews.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Create by xuantang
@@ -30,8 +28,34 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestParam String username, @RequestParam String password){
+    public BasicResponse<String> login(@RequestParam String username, @RequestParam String password){
+        User user = new User(username,password);
+        return userService.login(user);
+    }
 
-        return "success";
+    @RequestMapping(value = "/user/tel/{telephone}", method = RequestMethod.GET)
+    public BasicResponse<String> checkPhone(@PathVariable("telephone") String telephone){
+        User user = new User(telephone);
+        return userService.checkPhone(user);
+    }
+
+    @RequestMapping(value = "/user/{username}", method = RequestMethod.PUT)
+    public BasicResponse<String>updateUser(@PathVariable("username")String username, @RequestBody User user){
+        user.setUsername(username);
+        return userService.updateUser(user);
+    }
+
+    @RequestMapping(value = "/user/{username}/image", method = RequestMethod.POST)
+    public BasicResponse<String>updatePhoto(@PathVariable("username")String username, @RequestParam("photo") MultipartFile file){
+        User user = new User();
+        user.setUsername(username);
+        return userService.updatePhoto(user,file);
+    }
+
+    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
+    public BasicResponse<User>getUser(@PathVariable("username") String username){
+        User user = new User();
+        user.setUsername(username);
+        return userService.getUser(user);
     }
 }

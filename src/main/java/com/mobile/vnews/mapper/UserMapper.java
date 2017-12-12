@@ -15,11 +15,11 @@ public interface UserMapper {
             "VALUES (#{ID}, #{username}, #{password}, #{telephone})")
     int addUser(User user);
 
-    @Select("SELECT ID, username, email, sex, birthday, image, telephone, motto, info,\n" +
-            "  (SELECT count(*) FROM like_news WHERE ID = like_news.userID) AS likeNewsCount,\n" +
-            "  (SELECT count(*) FROM view_news WHERE ID = view_news.userID) AS viewNewsCount\n" +
-            "FROM user\n" +
-            "WHERE username = #{username} AND password = #{password}")
+    @Select("SELECT ID, username, email, sex, birthday, image, telephone, motto, info, " +
+            "(SELECT count(*) FROM like_news WHERE ID = like_news.userID) AS likeNewsCount, " +
+            "(SELECT count(*) FROM view_news WHERE ID = view_news.userID) AS viewNewsCount " +
+            "FROM user " +
+            "WHERE username = #{arg0} AND password = #{arg1}")
     User findUserByUsername(String username, String password);
 
     @Delete("DELETE FROM user WHERE username = #{username}")
@@ -29,7 +29,7 @@ public interface UserMapper {
     int removeUserByTelaphone(String telephone);
 
 
-    @Update("UPDATE user SET image=#{image} WHERE username = #{username}")
+    @Update("UPDATE user SET image = #{image} WHERE username = #{username}")
     int updatePhoto(String username);
 
     // TODO
@@ -42,12 +42,18 @@ public interface UserMapper {
     @Select("SELECT count(telephone) FROM user WHERE telephone = #{telephone}")
     int checkTelephone(String telephone);
 
+    /**
+     *
+     * @param telephone
+     * @param password
+     * @return
+     */
     @Select("SELECT ID, username, email, sex, birthday, image, telephone, motto, info,\n" +
             "  (SELECT count(*) FROM like_news WHERE ID = like_news.userID) AS likeNewsCount,\n" +
             "  (SELECT count(*) FROM view_news WHERE ID = view_news.userID) AS viewNewsCount\n" +
             "FROM user\n" +
-            "WHERE telephone = #{telephone} AND password = #{password}")
-    User findUserByTelephone(String telephone);
+            "WHERE telephone = #{arg0} AND password = #{arg1}")
+    User findUserByTelephone(String telephone, String password);
 
     @Select("SELECT ID, username, email, sex, birthday, image, telephone, motto, info,\n" +
             "  (SELECT count(*) FROM like_news WHERE ID = like_news.userID) AS likeNewsCount,\n" +

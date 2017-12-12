@@ -34,19 +34,19 @@ public interface CommentMapper {
             "  content, timestamp, newsID, floor,\n" +
             "  (SELECT count(*) FROM like_comment WHERE commentID = comment.ID) as likeCount\n" +
             "FROM comment, user as fromUser, user as toUser\n" +
-            "WHERE fromUser.ID = comment.fromID AND toUser.ID = comment.toID AND newsID = #{newsID}" +
-            " AND floor = #{floor} ORDER BY timestamp ASC")
+            "WHERE fromUser.ID = comment.fromID AND toUser.ID = comment.toID AND newsID = #{arg0}" +
+            " AND floor = #{arg1} ORDER BY timestamp ASC")
     List<Comment>getCommentByNewsIDAndFloor(int newsID, int floor);
 
     // TODO
-    @Insert("INSERT INTO like_comment (userID, commentID) VALUES (#{userID}, #{commentID})")
+    @Insert("INSERT INTO like_comment (userID, commentID) VALUES (#{arg0}, #{arg1})")
     int addLikeComment(String userID, int commentID);
 
     // TODO
-    @Delete("DELETE FROM like_comment WHERE userID = #{userID} AND commentID = #{commentID}")
+    @Delete("DELETE FROM like_comment WHERE userID = #{arg0} AND commentID = #{arg1}")
     int deleteLikeComment(String userID, int commentID);
 
     // TODO
-    @Select("SELECT count(*) FROM like_comment WHERE userID = #{userID} AND commentID = #{commentID}")
+    @Select("SELECT count(*) FROM like_comment WHERE userID = #{arg0} AND commentID = #{arg1}")
     int checkLikeComment(String userID, int commentID);
 }

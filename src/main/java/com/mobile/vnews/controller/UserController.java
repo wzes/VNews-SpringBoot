@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/{ID}", method = RequestMethod.GET)
-    public BasicResponse<User>getUser(@PathVariable("ID") String ID){
+    public BasicResponse<User> getUser(@PathVariable("ID") String ID){
         return userService.getUser(ID);
     }
 }

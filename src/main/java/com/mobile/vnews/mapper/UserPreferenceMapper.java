@@ -28,7 +28,7 @@ public interface UserPreferenceMapper {
      * @param typeID
      * @return
      */
-    @Insert("INSERT INTO user_preference (userID, typeID) VALUES (#{userID}, #{typeID})")
+    @Insert("INSERT INTO user_preference (userID, typeID) VALUES (#{arg0}, #{arg1})")
     int addUserPreference(String userID, int typeID);
 
     /**
@@ -50,7 +50,7 @@ public interface UserPreferenceMapper {
      */
     @Select("UPDATE user_preference\n" +
             "SET preference = preference + 1\n" +
-            "WHERE userID = #{userID} AND typeID = #{typeID}")
+            "WHERE userID = #{arg0} AND typeID = #{arg1}")
     void updateUserPreference(String userID, int typeID);
 
     /**
@@ -60,7 +60,7 @@ public interface UserPreferenceMapper {
      * @return
      */
     @Select("SELECT count(*) user_preference " +
-            "WHERE userID = #{userID} AND typeID = #{typeID}")
+            "WHERE userID = #{arg0} AND typeID = #{arg1}")
     int checkUserPreference(String userID, int typeID);
 
     /**
@@ -69,7 +69,7 @@ public interface UserPreferenceMapper {
      * @param typeID
      * @return
      */
-    @Delete("DELETE FROM user_preference WHERE userID = #{userID} AND typeID = #{typeID}")
+    @Delete("DELETE FROM user_preference WHERE userID = #{arg0} AND typeID = #{arg1}")
     int deleteUserPreference(String userID, int typeID);
 
 }

@@ -34,7 +34,7 @@ public interface NoticeMapper {
      * @param ID
      * @param fromID
      */
-    @Delete("DELETE FROM notice WHERE ID = #{ID} AND fromID = #{fromID}")
+    @Delete("DELETE FROM notice WHERE ID = #{arg0} AND fromID = #{arg1}")
     void deleteNoticeByID(int ID, String fromID);
 
 }

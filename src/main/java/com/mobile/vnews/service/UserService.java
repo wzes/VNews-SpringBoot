@@ -69,12 +69,16 @@ public class UserService {
         String message = "login success";
         try {
             User res = userMapper.findUserByUsername(username, password);
+            if (res == null) {
+                code = 400;
+                message = "login false";
+            }
             response.setContent(res);
             log.info(res);
         } catch (Exception e) {
             code = 500;
             response.setContent(null);
-            message = "login fail";
+            message = e.getMessage();
         }
         response.setCode(code);
         response.setMessage(message);

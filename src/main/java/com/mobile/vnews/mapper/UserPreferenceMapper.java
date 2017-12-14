@@ -7,7 +7,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-
+/**
+*@Author:kaijie
+*@description:
+*@Date:10:56 2017/12/14
+*/
 @Mapper
 public interface UserPreferenceMapper {
 

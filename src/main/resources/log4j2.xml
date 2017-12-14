@@ -18,7 +18,7 @@
         </RollingFile>
     </appenders>
     <loggers>
-        <Logger name="com.mobine.vnews" level="INFO">
+        <Logger name="com.mobile.vnews" level="INFO">
             <appender-ref ref="INFO_ROLLING_FILE" />
         </Logger>
         <root level="INFO">

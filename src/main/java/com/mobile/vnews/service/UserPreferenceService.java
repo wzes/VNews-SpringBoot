@@ -19,21 +19,21 @@ public class UserPreferenceService {
      * @param name
      * @return
      */
-    public BasicResponse<Integer> getTypeIDByName (String name){
-        BasicResponse<Integer> response=new BasicResponse<>();
-        int code=200;
-        String message="get typeID success";
+    public BasicResponse<Integer> getTypeIDByName (String name) {
+        BasicResponse<Integer> response = new BasicResponse<>();
+        int code = 200;
+        String message = "get typeID success";
         try{
-            Integer res= userPreferenceMapper.getTypeIDByName(name);
-            if(res==0){
-                code=400;
-                message="数据库查询错误";
+            Integer res = userPreferenceMapper.getTypeIDByName(name);
+            if(res == 0){
+                code = 400;
+                message = "数据库查询错误";
             }else{
                 response.setContent(res);
             }
         }catch (Exception e){
-            code=500;
-            message=e.getMessage();
+            code = 500;
+            message = e.getMessage();
         }
         response.setCode(code);
         response.setMessage(message);
@@ -46,17 +46,17 @@ public class UserPreferenceService {
      * @param type_id
      * @return
      */
-    public BasicResponse<String> addUserPreference(String user_id,int type_id){
-        BasicResponse<String> response=new BasicResponse<>();
-        int code=200;
-        String message="add user preference success";
-        try{
-            int res=userPreferenceMapper.addUserPreference(user_id,type_id);
-            if(res==0){
-                code=400;
-                message="数据库语句执行错误";
+    public BasicResponse<String> addUserPreference(String user_id,int type_id) {
+        BasicResponse<String> response = new BasicResponse<>();
+        int code = 200;
+        String message = "add user preference success";
+        try {
+            int res=userPreferenceMapper.addUserPreference(user_id, type_id);
+            if (res == 0) {
+                code = 400;
+                message = "数据库语句执行错误";
             }
-        }catch ( Exception e){
+        } catch ( Exception e) {
             code=500;
             message=e.getMessage();
         }
@@ -71,25 +71,25 @@ public class UserPreferenceService {
      * @param user_id
      * @return
      */
-    public BasicResponse<List<String>> getUserPreference(String user_id){
-        BasicResponse<List<String>> response=new BasicResponse<>();
-        int code=200;
-        String message="get user preference success";
-        try{
+    public BasicResponse<List<String>> getUserPreference(String user_id) {
+        BasicResponse<List<String>> response = new BasicResponse<>();
+        int code = 200;
+        String message = "get user preference success";
+        try {
             List<String> res=userPreferenceMapper.getUserPreference(user_id);
-            if(res.isEmpty()){
-                code=400;
+            if (res.isEmpty()) {
+                code = 400;
                 message="there is no preference category";
-            }else{
+            } else {
                 response.setContent(res);
             }
-        }catch (Exception e){
-            code=500;
-            message=e.getMessage();
+        } catch (Exception e) {
+            code = 500;
+            message = e.getMessage();
         }
         response.setCode(code);
         response.setMessage(message);
-        return  response;
+        return response;
     }
 
     /**
@@ -98,19 +98,19 @@ public class UserPreferenceService {
      * @param type_id
      * @return
      */
-    public BasicResponse<String> checkUserPreference(String user_id,int type_id){
-        BasicResponse<String> response=new BasicResponse<>();
-        int code=200;
-        String message="the preference exists";
-        try{
-            int res=userPreferenceMapper.checkUserPreference(user_id,type_id);
-            if(res==0){
-                code=400;
-                message="the preference does not exist";
+    public BasicResponse<String> checkUserPreference(String user_id, int type_id) {
+        BasicResponse<String> response = new BasicResponse<>();
+        int code = 200;
+        String message = "the preference exists";
+        try {
+            int res = userPreferenceMapper.checkUserPreference(user_id, type_id);
+            if (res == 0) {
+                code = 400;
+                message = "the preference does not exist";
             }
-        }catch (Exception e){
-            code=500;
-            message=e.getMessage();
+        } catch (Exception e) {
+            code = 500;
+            message = e.getMessage();
         }
         response.setCode(code);
         response.setMessage(message);
@@ -123,22 +123,22 @@ public class UserPreferenceService {
      * @param type_id
      * @return
      */
-    public BasicResponse<String> deleteUserPreference(String user_id,int type_id){
-        BasicResponse<String> response=new BasicResponse<>();
-        int code=200;
-        String message="delete the preference success";
+    public BasicResponse<String> deleteUserPreference(String user_id, int type_id) {
+        BasicResponse<String> response = new BasicResponse<>();
+        int code = 200;
+        String message = "delete the preference success";
         try{
-            int res=userPreferenceMapper.deleteUserPreference(user_id,type_id);
-            if(res==0){
-                code=400;
-                message="数据库语句执行错误";
+            int res = userPreferenceMapper.deleteUserPreference(user_id, type_id);
+            if (res == 0) {
+                code = 400;
+                message = "数据库语句执行错误";
             }
-        }catch (Exception e){
-            code=500;
-            message=e.getMessage();
+        } catch (Exception e) {
+            code = 500;
+            message = e.getMessage();
         }
         response.setCode(code);
         response.setMessage(message);
-        return  response;
+        return response;
     }
 }

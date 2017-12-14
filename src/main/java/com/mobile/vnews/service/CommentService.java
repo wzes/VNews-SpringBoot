@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * @author xuantang
+ */
 public class CommentService {
     @Autowired
     CommentMapper commentMapper;
@@ -22,21 +25,21 @@ public class CommentService {
      * @param news_id
      * @return
      */
-    public BasicResponse<List<Comment>> getMainFloor(int news_id){
-        BasicResponse<List<Comment>> response=new BasicResponse<>();
-        int code=200;
+    public BasicResponse<List<Comment>> getMainFloor(int news_id) {
+        BasicResponse<List<Comment>> response = new BasicResponse<>();
+        int code = 200;
         String message="return main floor information success";
         try{
             List<Comment> comments=commentMapper.getCommentByNewsID(news_id);
             if(comments.isEmpty()){
-                code=400;
-                message="数据库查询语句错误";
+                code = 400;
+                message = "数据库查询语句错误";
             }else{
                 response.setContent(comments);
             }
         }catch (Exception e){
-            code=500;
-            message=e.getMessage();
+            code = 500;
+            message = e.getMessage();
         }
         response.setCode(code);
         response.setMessage(message);
@@ -49,24 +52,24 @@ public class CommentService {
      * @param floor
      * @return
      */
-    public BasicResponse<List<Comment>> getCommentByNewsIDAndFloor(int news_id,int floor){
-        BasicResponse<List<Comment>> response=new BasicResponse<>();
-        int code=200;
-        String message="return all comments in one floor success";
-        try{
-            List<Comment> comments=commentMapper.getCommentByNewsIDAndFloor(news_id, floor);
-            if(comments.isEmpty()){
-                code=400;
-                message="数据库语句查询错误";
-            }else{
+    public BasicResponse<List<Comment>> getCommentByNewsIDAndFloor(int news_id, int floor) {
+        BasicResponse<List<Comment>> response = new BasicResponse<>();
+        int code = 200;
+        String message = "return all comments in one floor success";
+        try {
+            List<Comment> comments = commentMapper.getCommentByNewsIDAndFloor(news_id, floor);
+            if (comments.isEmpty()) {
+                code = 400;
+                message = "数据库语句查询错误";
+            } else {
                 response.setContent(comments);
             }
-        }catch ( Exception e){
+        } catch ( Exception e) {
             code=500;
             message=e.getMessage();
         }
         response.setCode(code);
         response.setMessage(message);
-        return  response;
+        return response;
     }
 }

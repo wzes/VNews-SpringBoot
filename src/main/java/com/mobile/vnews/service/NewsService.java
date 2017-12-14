@@ -89,7 +89,7 @@ public class NewsService {
         }
         response.setCode(code);
         response.setMessage(message);
-        return  response;
+        return response;
     }
 
     /**
@@ -110,7 +110,7 @@ public class NewsService {
         }
         response.setCode(code);
         response.setMessage(message);
-        return  response;
+        return response;
     }
 
     /**
@@ -142,7 +142,7 @@ public class NewsService {
      * @return
      */
     public BasicResponse<String> checkFavoriteNews(String userID, int newsID) {
-        BasicResponse<String> response=new BasicResponse<>();
+        BasicResponse<String> response = new BasicResponse<>();
         int code = 200;
         String message = "favorite news exists";
         String result = "false";
@@ -161,7 +161,7 @@ public class NewsService {
         return response;
     }
     //删除最喜爱新闻
-    public  BasicResponse<String> deleteFavoriteNews(String userID, int newsID) {
+    public BasicResponse<String> deleteFavoriteNews(String userID, int newsID) {
         BasicResponse<String> response=new BasicResponse<>();
         int code = 200;
         String message = "delete favorite news success";
@@ -185,11 +185,11 @@ public class NewsService {
      */
     public BasicResponse<String> addViewNews(String userID, int newsID) {
         BasicResponse<String> response = new BasicResponse<>();
-        int code=200;
-        String message="the news has been viewed";
-        try{
+        int code = 200;
+        String message = "the news has been viewed";
+        try {
             newsMapper.addViewNews(userID, newsID);
-        }catch ( Exception e){
+        } catch (Exception e) {
             code = 500;
             message = e.getMessage();
         }
@@ -207,10 +207,10 @@ public class NewsService {
         BasicResponse<List<News>> response = new BasicResponse<>();
         int code = 200;
         String message = "the news has been viewed";
-        try{
+        try {
             List<News> news = newsMapper.getViewNewsByUserID(userID);
             response.setContent(news);
-        }catch ( Exception e){
+        } catch ( Exception e) {
             code = 500;
             message = e.getMessage();
         }

@@ -21,7 +21,7 @@ public class NewsService {
     private static  Logger log = LogManager.getLogger(NewsService.class);
 
     /**
-     *
+     *根据种类获得新闻
      * @param news
      * @param start
      * @param count
@@ -52,7 +52,7 @@ public class NewsService {
     }
 
     /**
-     *
+     *返回最热新闻
      * @param count
      * @return
      */
@@ -73,7 +73,7 @@ public class NewsService {
     }
 
     /**
-     *
+     *根据id获取新闻
      * @param ID
      * @return
      */
@@ -94,7 +94,7 @@ public class NewsService {
     }
 
     /**
-     *
+     *根据用户id获取最喜爱新闻
      * @param UserID
      * @return
      */
@@ -115,7 +115,7 @@ public class NewsService {
     }
 
     /**
-     *
+     *添加最喜爱新闻
      * @param userID
      * @param newsID
      * @return
@@ -137,7 +137,7 @@ public class NewsService {
     }
 
     /**
-     *
+     *检查某新闻是不是最喜爱新闻
      * @param userID
      * @param newsID
      * @return
@@ -161,7 +161,7 @@ public class NewsService {
         response.setContent(result);
         return response;
     }
-
+    //删除最喜爱新闻
     public  BasicResponse<String> deleteFavoriteNews(String userID, int newsID) {
         BasicResponse<String> response=new BasicResponse<>();
         int code = 200;
@@ -179,7 +179,7 @@ public class NewsService {
     }
 
     /**
-     *
+     *添加最喜爱新闻
      * @param userID
      * @param newsID
      * @return
@@ -200,7 +200,7 @@ public class NewsService {
     }
 
     /**
-     *
+     *通过用户id得到浏览新闻消息
      * @param userID
      * @return
      */

@@ -4,7 +4,6 @@ package com.mobile.vnews.service;
 import com.mobile.vnews.mapper.NewsMapper;
 import com.mobile.vnews.module.BasicResponse;
 import com.mobile.vnews.module.bean.News;
-import com.mobile.vnews.module.bean.UserPreference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

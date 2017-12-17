@@ -8,13 +8,12 @@ import com.mobile.vnews.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-<<<<<<< HEAD
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-=======
->>>>>>> bac3dae35875bf736282a42e1eb54e4e43dccd97
+
 import java.util.List;
 
 @RestController

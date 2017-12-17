@@ -38,15 +38,38 @@ public interface CommentMapper {
             " AND floor = #{arg1} ORDER BY timestamp ASC")
     List<Comment>getCommentByNewsIDAndFloor(int newsID, int floor);
 
-    // TODO
+    /**
+     * 点赞
+     * @param userID
+     * @param commentID
+     * @return
+     */
     @Insert("INSERT INTO like_comment (userID, commentID) VALUES (#{arg0}, #{arg1})")
     int addLikeComment(String userID, int commentID);
 
-    // TODO
+    /**
+     * 取消点赞
+     * @param userID
+     * @param commentID
+     * @return
+     */
     @Delete("DELETE FROM like_comment WHERE userID = #{arg0} AND commentID = #{arg1}")
     int deleteLikeComment(String userID, int commentID);
 
-    // TODO
+    /**
+     * 检查是否点赞
+     * @param userID
+     * @param commentID
+     * @return
+     */
     @Select("SELECT count(*) FROM like_comment WHERE userID = #{arg0} AND commentID = #{arg1}")
-    int checkLikeComment(String userID, int commentID);
+    Comment checkLikeComment(String userID, int commentID);
+
+    /**
+     * 添加评论
+     * @param comment
+     * @return
+     */
+    @Insert("INSERT INTO comment (fromID,toID,content,newsID,floor) VALUES(#{fromID},#{toID},#{content},#{newsID},#{floor})")
+    int addComment(Comment comment);
 }

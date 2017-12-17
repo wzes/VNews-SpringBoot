@@ -19,7 +19,7 @@ public class UserPreferenceController {
     UserPreferenceService userPreferenceService;
 
     /**
-     *
+     *通过ID得到新闻种类的名字
      * @param name
      * @return
      */
@@ -40,7 +40,7 @@ public class UserPreferenceController {
     }
 
     /**
-     *
+     *通过用户id得到用户喜爱新闻的列表
      * @param user_id
      * @return
      */
@@ -51,7 +51,7 @@ public class UserPreferenceController {
     }
 
     /**
-     *
+     *删除用户喜爱的新闻的列表
      * @param user_id
      * @param type_id
      * @return
@@ -62,7 +62,7 @@ public class UserPreferenceController {
     }
 
     /**
-     *
+     *检查某个类型是否已经添加到喜爱列表中
      * @param user_id
      * @param type_id
      * @return

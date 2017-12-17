@@ -1,12 +1,21 @@
 package com.mobile.vnews.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.mobile.vnews.mapper.UserMapper;
 import com.mobile.vnews.module.BasicResponse;
 import com.mobile.vnews.module.bean.*;
 import com.mobile.vnews.service.NewsService;
+import com.mobile.vnews.service.UserService;
+import org.apache.logging.log4j.core.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Paths;
 import java.util.List;
 
+import static org.apache.logging.log4j.core.config.LoggerConfig.ROOT;
 @RestController
 @RequestMapping("/vnews/news")
 public class NewsController {
@@ -62,15 +71,7 @@ public class NewsController {
     public BasicResponse<News> detail(@PathVariable("news_id") int ID){
         return newsService.getNewsByID(ID);
     }
-
-    /**
-     * 根据用户id得到用户喜爱的新闻
-     * @param user_id
-     * @param category
-     * @param start
-     * @param count
-     * @return
-     */
+    //根据用户id得到用户喜爱的新闻
     @RequestMapping(value="/{user_id}/likes",method = RequestMethod.GET)
     public BasicResponse<List<News>> favoriteNews(@PathVariable("user_id") String user_id,
                                                   @RequestParam("category")String category,

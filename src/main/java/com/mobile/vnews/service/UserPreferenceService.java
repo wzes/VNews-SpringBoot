@@ -118,7 +118,7 @@ public class UserPreferenceService {
     }
 
     /**
-     * 删除用户喜爱新闻的种类删
+     * 删除用户喜爱新闻的种类
      * @param user_id
      * @param type_id
      * @return

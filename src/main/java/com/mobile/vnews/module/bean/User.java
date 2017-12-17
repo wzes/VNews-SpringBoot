@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class User {
 
-    private String ID;
+    private String id;
     private String username;
     private String password;
     private String email;
@@ -43,12 +43,12 @@ public class User {
     }
 
     public User(String username,String password){
-        this.username=username;
-        this.password=password;
+        this.username = username;
+        this.password = password;
     }
 
     public User(String telephone){
-        this.telephone=telephone;
+        this.telephone = telephone;
     }
 
     public User(String username, String password, String telephone) {
@@ -58,12 +58,12 @@ public class User {
     }
 
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {

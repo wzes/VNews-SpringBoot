@@ -49,21 +49,24 @@ public class UserController {
 
     /**
      * 检查电话号码是否能被使用
-     * @param telephone
+     * @param phone
      * @return
      */
-    @RequestMapping(value = "/user/tel/{telephone}", method = RequestMethod.GET)
-    public BasicResponse<String> checkPhone(@PathVariable("telephone") String telephone){
-        return userService.checkPhone(telephone);
+    @RequestMapping(value = "/user/phone/{phone}", method = RequestMethod.GET)
+    public BasicResponse<String> checkPhone(@PathVariable("phone") String phone){
+        return userService.checkPhone(phone);
     }
 
     /**
+     * TODO
      * 更新用户信息
      * @param user
      * @return
      */
     @RequestMapping(value = "/user", method = RequestMethod.PUT)
-    public BasicResponse<String>updateUser(@RequestBody User user){
+    @ResponseBody
+    public BasicResponse<String> updateUser(@RequestBody User user){
+        System.out.println(user.getId());
         return userService.updateUser(user);
     }
 

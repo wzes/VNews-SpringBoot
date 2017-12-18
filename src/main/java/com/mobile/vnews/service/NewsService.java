@@ -14,6 +14,7 @@ import java.util.List;
 
 @Service
 public class NewsService {
+
     @Autowired
     NewsMapper newsMapper;
 
@@ -32,7 +33,7 @@ public class NewsService {
         String message = "get category news success";
         try{
             ArrayList<News> news;
-            if (category == null) {
+            if (category == null || category.length() == 0) {
                 news = (ArrayList<News>) newsMapper.getNews(start, count);
             } else {
                 news = (ArrayList<News>) newsMapper.getNewsByType(category, start, count);
@@ -123,15 +124,17 @@ public class NewsService {
         BasicResponse<String> response = new BasicResponse<>();
         int code = 200;
         String message = "add favorite news success";
+        String content = "success";
         try{
             newsMapper.addFavoriteNews(userID, newsID);
         }catch (Exception e){
             code = 500;
             message = e.getMessage();
+            content = "fail";
         }
         response.setCode(code);
         response.setMessage(message);
-        response.setContent("");
+        response.setContent(content);
         return response;
     }
 
@@ -160,25 +163,33 @@ public class NewsService {
         response.setContent(result);
         return response;
     }
-    //删除最喜爱新闻
+
+    /**
+     * 删除最喜爱新闻
+     * @param userID
+     * @param newsID
+     * @return
+     */
     public BasicResponse<String> deleteFavoriteNews(String userID, int newsID) {
-        BasicResponse<String> response=new BasicResponse<>();
+        BasicResponse<String> response = new BasicResponse<>();
         int code = 200;
         String message = "delete favorite news success";
+        String result = "false";
         try{
             newsMapper.deleteFavoriteNews(userID, newsID);
+            result = "true";
         }catch (Exception e){
             code = 500;
             message = e.getMessage();
         }
         response.setCode(code);
         response.setMessage(message);
-        response.setContent("");
+        response.setContent(result);
         return  response;
     }
 
     /**
-     *添加最喜爱新闻
+     * 添加浏览新闻
      * @param userID
      * @param newsID
      * @return
@@ -186,15 +197,20 @@ public class NewsService {
     public BasicResponse<String> addViewNews(String userID, int newsID) {
         BasicResponse<String> response = new BasicResponse<>();
         int code = 200;
-        String message = "the news has been viewed";
+        String message = "add view";
+        String result = "false";
         try {
-            newsMapper.addViewNews(userID, newsID);
+            if (newsMapper.checkViewNews(userID, newsID) == 0) {
+                newsMapper.addViewNews(userID, newsID);
+            }
+            result = "true";
         } catch (Exception e) {
             code = 500;
             message = e.getMessage();
         }
         response.setCode(code);
         response.setMessage(message);
+        response.setContent(result);
         return response;
     }
 
@@ -206,7 +222,7 @@ public class NewsService {
     public BasicResponse<List<News>> getViewNewsByUserID(String userID) {
         BasicResponse<List<News>> response = new BasicResponse<>();
         int code = 200;
-        String message = "the news has been viewed";
+        String message = "the news list of user has been viewed";
         try {
             List<News> news = newsMapper.getViewNewsByUserID(userID);
             response.setContent(news);

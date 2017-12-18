@@ -2,10 +2,7 @@ package com.mobile.vnews.mapper;
 
 
 import com.mobile.vnews.module.bean.News;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ public  interface NewsMapper {
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
             "  FROM news limit #{start}, #{count}")
-    List<News> getNews(int start, int count);
+    List<News> getNews(@Param("start") int start, @Param("count") int count);
 
     /**
      * Add likeCount and viewCount
@@ -61,7 +58,9 @@ public  interface NewsMapper {
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
             "  FROM news WHERE type = #{type} limit #{start}, #{count}")
-    List<News> getNewsByType(String type, int start, int count);
+    List<News> getNewsByType(@Param("type") String type,
+                             @Param("start") int start,
+                             @Param("count") int count);
 
     /**
      * Add likeCount and viewCount
@@ -105,11 +104,14 @@ public  interface NewsMapper {
     @Select("SELECT count(*) FROM like_news WHERE userID = #{arg0} AND newsID = #{arg1}")
     int checkFavoriteNews(String userID, int newsID);
 
-    @Delete("DELETE FROM like_news WHERE userID = #{arg0} AND newsID = #{arg１}")
+    @Delete("DELETE FROM like_news WHERE userID = #{arg0} AND newsID = #{arg1}")
     void deleteFavoriteNews(String userID, int newsID);
 
     @Insert("INSERT INTO view_news (userID, newsID) VALUES (#{arg0}, #{arg1})")
     void addViewNews(String userID, int newsID);
+
+    @Select("SELECT count(*) FROM view_news WHERE userID = #{arg0} AND newsID = #{arg1}")
+    int checkViewNews(String userID, int newsID);
 
     /**
      * Add likeCount and viewCount
@@ -120,7 +122,7 @@ public  interface NewsMapper {
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
-            "FROM news, like_news WHERE ID = view_news.newsID AND userID = #{userID}")
+            "FROM news, like_news WHERE ID = like_news.newsID AND userID = #{userID}")
     List<News> getViewNewsByUserID(String userID);
 }
 

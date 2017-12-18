@@ -43,7 +43,7 @@ public class UserService {
         String message = "success";
         try {
             // add user
-            user.setID(IdUtils.getUUID());
+            user.setId(IdUtils.getUUID());
             int res = userMapper.addUser(user);
             log.info(res);
         } catch (Exception e) {

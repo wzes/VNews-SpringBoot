@@ -5,17 +5,11 @@ import com.mobile.vnews.mapper.UserMapper;
 import com.mobile.vnews.module.BasicResponse;
 import com.mobile.vnews.module.bean.*;
 import com.mobile.vnews.service.NewsService;
-import com.mobile.vnews.service.UserService;
-import org.apache.logging.log4j.core.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import java.nio.file.Paths;
 import java.util.List;
 
-import static org.apache.logging.log4j.core.config.LoggerConfig.ROOT;
 @RestController
 @RequestMapping("/vnews/news")
 public class NewsController {
@@ -28,12 +22,10 @@ public class NewsController {
      * @param count
      * @return
      */
-    @RequestMapping(value="",method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public BasicResponse<List<News>> allCategoryNews(@RequestParam("start")int start,
                                                      @RequestParam("count")int count) {
-        News news=new News();
-        news.setType("");
-        return newsService.getNews("",start,count);
+        return newsService.getNews("", start, count);
     }
 
     /**
@@ -43,13 +35,11 @@ public class NewsController {
      * @param count
      * @return
      */
-    @RequestMapping(value="{category}",method = RequestMethod.GET)
+    @RequestMapping(value = "{category}",method = RequestMethod.GET)
     public BasicResponse<List<News>> CategoryNews(@PathVariable("category") String category,
                                                   @RequestParam("start")int start,
                                                   @RequestParam("count")int count) {
-        News news=new News();
-        news.setType(category);
-        return newsService.getNews(category,start,count);
+        return newsService.getNews(category, start, count);
     }
 
     /**
@@ -57,7 +47,7 @@ public class NewsController {
      * @param count
      * @return
      */
-    @RequestMapping(value="/hots",method = RequestMethod.GET)
+    @RequestMapping(value = "/hots",method = RequestMethod.GET)
     public BasicResponse<List<News>> hotNews(@RequestParam("count") int count) {
         return newsService.getHotNews(count);
     }
@@ -71,12 +61,14 @@ public class NewsController {
     public BasicResponse<News> detail(@PathVariable("news_id") int ID){
         return newsService.getNewsByID(ID);
     }
-    //根据用户id得到用户喜爱的新闻
+
+    /**
+     * 根据用户id得到用户喜爱的新闻
+     * @param user_id
+     * @return
+     */
     @RequestMapping(value="/{user_id}/likes",method = RequestMethod.GET)
-    public BasicResponse<List<News>> favoriteNews(@PathVariable("user_id") String user_id,
-                                                  @RequestParam("category")String category,
-                                                  @RequestParam("start") int start,
-                                                  @RequestParam("count") int count) {
+    public BasicResponse<List<News>> favoriteNews(@PathVariable("user_id") String user_id) {
         return newsService.getFavoriteNewsByUserID(user_id);
     }
 
@@ -86,10 +78,10 @@ public class NewsController {
      * @param news_id
      * @return
      */
-    @RequestMapping(value="/{user_id}/like/{news_id}",method = RequestMethod.POST)
-    public BasicResponse<String> addFavoriteNews(@PathVariable("user_id") String user_id,
-                                                 @PathVariable("news_id") int news_id) {
-        return newsService.addFavoriteNews(user_id,news_id);
+    @RequestMapping(value="/like",method = RequestMethod.POST)
+    public BasicResponse<String> addFavoriteNews(@RequestParam("user_id") String user_id,
+                                                 @RequestParam("news_id") int news_id) {
+        return newsService.addFavoriteNews(user_id, news_id);
     }
 
     /**
@@ -113,7 +105,7 @@ public class NewsController {
     @RequestMapping(value="/{user_id}/like/{news_id}",method = RequestMethod.DELETE)
     public BasicResponse<String> deleteFavoriteNews(@PathVariable("user_id") String user_id,
                                                     @PathVariable("news_id") int news_id) {
-        return newsService.deleteFavoriteNews(user_id,news_id);
+        return newsService.deleteFavoriteNews(user_id, news_id);
     }
 
     /**
@@ -122,21 +114,19 @@ public class NewsController {
      * @param user_id
      * @return
      */
-    @RequestMapping(value = "/view/{user_id}/{news_id}",method = RequestMethod.POST)
-    public BasicResponse<String> addViewedNews(@PathVariable("news_id") int news_id,
-                                               @PathVariable("user_id") String user_id) {
-        return  newsService.addViewNews(user_id,news_id);
+    @RequestMapping(value = "/view",method = RequestMethod.POST)
+    public BasicResponse<String> addViewedNews(@RequestParam("user_id") String user_id,
+                                               @RequestParam("news_id") int news_id) {
+        return  newsService.addViewNews(user_id, news_id);
     }
 
     /**
      * 得到浏览过的新闻
-     * @param news_id
      * @param user_id
      * @return
      */
-    @RequestMapping(value="/view/{user_id}/{news_id}",method = RequestMethod.GET)
-    public BasicResponse<List<News>> getViewNews(@PathVariable("news_id")int news_id,
-                                                 @PathVariable("user_id")String user_id) {
+    @RequestMapping(value="/{user_id}/views",method = RequestMethod.GET)
+    public BasicResponse<List<News>> getViewNews(@PathVariable("user_id")String user_id) {
         return newsService.getViewNewsByUserID(user_id);
     }
 }

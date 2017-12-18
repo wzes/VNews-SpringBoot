@@ -34,10 +34,9 @@ public interface UserMapper {
 
     // TODO
     @Update("UPDATE user SET password = #{password}, " +
-            "email = #{email}, sex = #{sex}, birthday= #{birthday} " +
-            "WHERE username = #{username}")
+            "email = #{email}, sex = #{sex}, birthday= #{birthday}, motto = #{motto}, username = #{username}" +
+            "WHERE ID = #{id}")
     int updateUser(User user);
-
 
     @Select("SELECT count(telephone) FROM user WHERE telephone = #{telephone}")
     int checkTelephone(String telephone);

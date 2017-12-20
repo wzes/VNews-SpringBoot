@@ -33,7 +33,7 @@ public class News {
     private String type;
 
     private int viewCount;
-    private int followCount;
+    private int likeCount;
     private int commentCount;
 
     public int getID() {
@@ -124,12 +124,12 @@ public class News {
         this.viewCount = viewCount;
     }
 
-    public int getFollowCount() {
-        return followCount;
+    public int getLikeCount() {
+        return likeCount;
     }
 
-    public void setFollowCount(int followCount) {
-        this.followCount = followCount;
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
     }
 
     public int getCommentCount() {

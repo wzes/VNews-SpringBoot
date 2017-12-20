@@ -48,7 +48,9 @@ public class UserController {
     }
 
     /**
+     * TODO
      * 检查电话号码是否能被使用
+     * 如果可用则发短信，并且返回验证码
      * @param phone
      * @return
      */

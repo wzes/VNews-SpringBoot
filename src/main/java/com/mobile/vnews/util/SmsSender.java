@@ -23,7 +23,7 @@ public class SmsSender {
     static final String accessKeyId = "LTAInFvChBWf1KL1";
     static final String accessKeySecret = "tScGqXmTf2aJfFTUNjQqSj31utNooW";
 
-    private static SendSmsResponse sendSms() throws ClientException {
+    private static SendSmsResponse sendSms(String string,int num) throws ClientException {
 
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
@@ -37,13 +37,13 @@ public class SmsSender {
         //组装请求对象-具体描述见控制台-文档部分内容
         SendSmsRequest request = new SendSmsRequest();
         //必填:待发送手机号
-        request.setPhoneNumbers("18001997427");
+        request.setPhoneNumbers(string);
         //必填:短信签名-可在短信控制台中找到
         request.setSignName("VNews开发团队");
         //必填:短信模板-可在短信控制台中找到
         request.setTemplateCode("SMS_117520700");
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        request.setTemplateParam("{\"code\":\"7777\"}");
+        request.setTemplateParam("{\"code\":"+num+"}");
 
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
         //request.setSmsUpExtendCode("90997");
@@ -89,10 +89,10 @@ public class SmsSender {
         return querySendDetailsResponse;
     }
 
-    public void sendMessage() throws ClientException, InterruptedException {
+    public void sendMessage(String string,int num) throws ClientException, InterruptedException {
 
         //发短信
-        SendSmsResponse response = sendSms();
+        SendSmsResponse response = sendSms(string,num);
         System.out.println("短信接口返回的数据----------------");
         System.out.println("Code=" + response.getCode());
         System.out.println("Message=" + response.getMessage());

@@ -103,6 +103,13 @@ public class UserService {
                 message = "telephone not available";
                 content = "false";
             } else {
+                SmsSender smsSender=new SmsSender();
+                try{
+                    int randNum=1+(int)(Math.random()*((999999-1)+1));
+    			    smsSender.sendMessage(telephone,randNum);
+    		    }catch (Exception e){
+    		        e.getMessage();
+            	}
                 content = "true";
             }
         } catch (Exception e) {

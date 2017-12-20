@@ -159,7 +159,7 @@ public class HttpNewsTest {
         OkHttpClient mOkHttpClient = new OkHttpClient();
         RequestBody formBody = new FormBody.Builder()
                 .add("user_id", "e8dbf7128a90432bbc80")
-                .add("news_id", "1")
+                .add("news_id", "3")
                 .build();
         Request request = new Request.Builder()
                 .url("http://localhost:9909/vnews/news/like")
@@ -184,7 +184,7 @@ public class HttpNewsTest {
         OkHttpClient mOkHttpClient = new OkHttpClient();
         RequestBody formBody = new FormBody.Builder()
                 .add("user_id", "e8dbf7128a90432bbc80")
-                .add("news_id", "1")
+                .add("news_id", "7")
                 .build();
         Request request = new Request.Builder()
                 .url("http://localhost:9909/vnews/news/view")

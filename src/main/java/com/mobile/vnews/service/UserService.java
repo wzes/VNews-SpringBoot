@@ -91,26 +91,27 @@ public class UserService {
      * @param telephone
      * @return
      */
-    public BasicResponse<String> checkPhone(String telephone) {
+    public BasicResponse<String> checkPhone(String phone) {
         BasicResponse<String> response = new BasicResponse<>();
         int code = 200;
-        String message = "telephone available";
+        String message = "phone available";
         String content = null;
         try {
-            int res = userMapper.checkTelephone(telephone);
+            int res = userMapper.checkTelephone(phone);
             if(res > 0) {
                 code = 403;
-                message = "telephone not available";
+                message = "phone not available";
                 content = "false";
             } else {
-                SmsSender smsSender=new SmsSender();
+                SmsSender smsSender = new SmsSender();
                 try{
-                    int randNum=1+(int)(Math.random()*((999999-1)+1));
-    			    smsSender.sendMessage(telephone,randNum);
+                    int randNum = 1 + (int)(Math.random()*((999999-1) + 1));
+    			    smsSender.sendMessage(phone, randNum);
+                    content = String.valueOf(randNum);
     		    }catch (Exception e){
     		        e.getMessage();
+    		        content = "false";
             	}
-                content = "true";
             }
         } catch (Exception e) {
             message = e.getMessage();

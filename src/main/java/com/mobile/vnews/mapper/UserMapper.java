@@ -29,8 +29,9 @@ public interface UserMapper {
     int removeUserByTelaphone(String telephone);
 
 
-    @Update("UPDATE user SET image = #{image} WHERE username = #{username}")
-    int updatePhoto(String username);
+    @Update("UPDATE user SET image = #{image} WHERE ID = #{userID}")
+    int updatePhoto(@Param("userID") String userID,
+                    @Param("image")String image);
 
     // TODO
     @Update("UPDATE user SET password = #{password}, " +

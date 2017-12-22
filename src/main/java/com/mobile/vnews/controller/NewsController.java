@@ -1,18 +1,12 @@
 package com.mobile.vnews.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.mobile.vnews.mapper.UserMapper;
 import com.mobile.vnews.module.BasicResponse;
+import com.mobile.vnews.module.UNTmp;
 import com.mobile.vnews.module.bean.*;
 import com.mobile.vnews.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import java.util.List;
 
@@ -41,7 +35,7 @@ public class NewsController {
      * @param count
      * @return
      */
-    @RequestMapping(value = "{category}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{category}",method = RequestMethod.GET)
     public BasicResponse<List<News>> CategoryNews(@PathVariable("category") String category,
                                                   @RequestParam("start")int start,
                                                   @RequestParam("count")int count) {
@@ -85,9 +79,8 @@ public class NewsController {
      * @return
      */
     @RequestMapping(value="/like",method = RequestMethod.POST)
-    public BasicResponse<String> addFavoriteNews(@RequestParam("user_id") String user_id,
-                                                 @RequestParam("news_id") int news_id) {
-        return newsService.addFavoriteNews(user_id, news_id);
+    public BasicResponse<String> addFavoriteNews(@RequestBody UNTmp UNTmp) {
+        return newsService.addFavoriteNews(UNTmp.getUser_id(), UNTmp.getNews_id());
     }
 
     /**
@@ -97,9 +90,8 @@ public class NewsController {
      * @return
      */
     @RequestMapping(value="/{user_id}/like/{news_id}",method = RequestMethod.GET)
-    public BasicResponse<String> checkFavoriteNews(@PathVariable("user_id") String user_id,
-                                                   @PathVariable("news_id") int news_id) {
-        return newsService.checkFavoriteNews(user_id,news_id);
+    public BasicResponse<String> checkFavoriteNews(@RequestBody UNTmp UNTmp) {
+        return newsService.checkFavoriteNews(UNTmp.getUser_id(), UNTmp.getNews_id());
     }
 
     /**
@@ -108,7 +100,7 @@ public class NewsController {
      * @param news_id
      * @return
      */
-    @RequestMapping(value="/{user_id}/like/{news_id}",method = RequestMethod.DELETE)
+    @RequestMapping(value="/{user_id}/like/{news_id}", method = RequestMethod.DELETE)
     public BasicResponse<String> deleteFavoriteNews(@PathVariable("user_id") String user_id,
                                                     @PathVariable("news_id") int news_id) {
         return newsService.deleteFavoriteNews(user_id, news_id);
@@ -120,10 +112,9 @@ public class NewsController {
      * @param user_id
      * @return
      */
-    @RequestMapping(value = "/view",method = RequestMethod.POST)
-    public BasicResponse<String> addViewedNews(@RequestParam("user_id") String user_id,
-                                               @RequestParam("news_id") int news_id) {
-        return  newsService.addViewNews(user_id, news_id);
+    @RequestMapping(value = "/view", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+    public BasicResponse<String> addViewedNews(@RequestBody UNTmp UNTmp) {
+        return  newsService.addViewNews(UNTmp.getUser_id(), UNTmp.getNews_id());
     }
 
     /**

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("/vnews")
+@RestController
 public class MessageController {
     @Autowired
     NoticeService noticeService;
@@ -22,7 +23,7 @@ public class MessageController {
      * @param user_id
      * @return
      */
-    @RequestMapping(value = "notice/{user_id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/notice/{user_id}",method = RequestMethod.GET)
     public BasicResponse<List<Message>> getNoticeByUserID(@PathVariable("user_id") String user_id) {
         return noticeService.getMessagesByID(user_id);
     }

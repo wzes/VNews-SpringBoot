@@ -120,7 +120,7 @@ public class NewsService {
      * @param newsID
      * @return
      */
-    public BasicResponse<String> addFavoriteNews(String userID, int newsID) {
+    public BasicResponse<String> addFavoriteNews(String userID, String newsID) {
         BasicResponse<String> response = new BasicResponse<>();
         int code = 200;
         String message = "add favorite news success";
@@ -144,7 +144,7 @@ public class NewsService {
      * @param newsID
      * @return
      */
-    public BasicResponse<String> checkFavoriteNews(String userID, int newsID) {
+    public BasicResponse<String> checkFavoriteNews(String userID, String newsID) {
         BasicResponse<String> response = new BasicResponse<>();
         int code = 200;
         String message = "favorite news exists";
@@ -194,7 +194,7 @@ public class NewsService {
      * @param newsID
      * @return
      */
-    public BasicResponse<String> addViewNews(String userID, int newsID) {
+    public BasicResponse<String> addViewNews(String userID, String newsID) {
         BasicResponse<String> response = new BasicResponse<>();
         int code = 200;
         String message = "add view";

@@ -8,9 +8,10 @@ import com.mobile.vnews.module.BasicResponse;
 import com.mobile.vnews.mapper.MessageMapper;
 import com.mobile.vnews.module.bean.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class NoticeService{
     @Autowired
     MessageMapper messageMapper;

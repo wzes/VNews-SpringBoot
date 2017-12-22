@@ -99,19 +99,19 @@ public  interface NewsMapper {
     List<News> getFavoriteNewsByUserID(String userID);
 
     @Insert("INSERT INTO like_news (userID, newsID) VALUES (#{arg0}, #{arg1})")
-    void addFavoriteNews(String userID, int newsID);
+    void addFavoriteNews(String userID, String newsID);
 
     @Select("SELECT count(*) FROM like_news WHERE userID = #{arg0} AND newsID = #{arg1}")
-    int checkFavoriteNews(String userID, int newsID);
+    int checkFavoriteNews(String userID, String newsID);
 
     @Delete("DELETE FROM like_news WHERE userID = #{arg0} AND newsID = #{arg1}")
     void deleteFavoriteNews(String userID, int newsID);
 
     @Insert("INSERT INTO view_news (userID, newsID) VALUES (#{arg0}, #{arg1})")
-    void addViewNews(String userID, int newsID);
+    void addViewNews(String userID, String newsID);
 
     @Select("SELECT count(*) FROM view_news WHERE userID = #{arg0} AND newsID = #{arg1}")
-    int checkViewNews(String userID, int newsID);
+    int checkViewNews(String userID, String newsID);
 
     /**
      * Add likeCount and viewCount

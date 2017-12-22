@@ -163,6 +163,12 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/gson-2.3.1.jar</systemPath>
 		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>edu.stanford.nlp</groupId>-->
+			<!--<artifactId>stanford-corenlp</artifactId>-->
+			<!--<version>3.8.0</version>-->
+			<!--<classifier>models-english</classifier>-->
+		<!--</dependency>-->
 	</dependencies>
 
 	<build>

@@ -1,9 +1,12 @@
 package com.mobile.vnews;
 
+import com.alibaba.fastjson.JSON;
+import com.mobile.vnews.module.UNTmp;
 import okhttp3.*;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * @author Create by xuantang
@@ -186,10 +189,19 @@ public class HttpNewsTest {
                 .add("user_id", "e8dbf7128a90432bbc80")
                 .add("news_id", "7")
                 .build();
+
+        UNTmp UNTmp = new UNTmp("e8dbf7128a90432bbc80", "7");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("user_id", "e8dbf7128a90432bbc80");
+        map.put("news_id", "7");
+        //Log.i(TAG, "view: " + userID + " " + newID + " " + JSON.toJSONString(map));
+        System.out.println(JSON.toJSONString(UNTmp));
+        RequestBody requestBody = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"), JSON.toJSONString(UNTmp));
         Request request = new Request.Builder()
                 .url("http://localhost:9909/vnews/news/view")
                 .header("Content-Type", "application/json")
-                .post(formBody)
+                .post(requestBody)
                 .build();
         Call call = mOkHttpClient.newCall(request);
 

@@ -1,6 +1,7 @@
 package com.mobile.vnews.controller;
 
 import com.mobile.vnews.module.BasicResponse;
+import com.mobile.vnews.module.UTmp;
 import com.mobile.vnews.module.bean.User;
 import com.mobile.vnews.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,8 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public BasicResponse<User> login(@RequestParam String username,
-                                       @RequestParam String password){
-        return userService.login(username, password);
+    public BasicResponse<User> login(@RequestBody UTmp uTmp){
+        return userService.login(uTmp.getUsername(), uTmp.getPassword());
     }
 
     /**

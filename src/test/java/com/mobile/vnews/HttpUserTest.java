@@ -43,9 +43,10 @@ public class HttpUserTest {
         RequestBody formBody = new FormBody.Builder()
                 .add("username", "Hadoop")
                 .add("password", "12346")
+                .add("telephone", "18206954606")
                 .build();
         Request request = new Request.Builder()
-                .url("http://localhost:9909/vnews/login")
+                .url("http://localhost:9909/vnews/register")
                 .header("Content-Type", "application/json")
                 .post(formBody)
                 .build();

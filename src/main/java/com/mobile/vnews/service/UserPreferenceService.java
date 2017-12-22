@@ -3,6 +3,7 @@ package com.mobile.vnews.service;
 import com.mobile.vnews.mapper.UserPreferenceMapper;
 import com.mobile.vnews.module.BasicResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 /**
@@ -10,6 +11,7 @@ import java.util.List;
 *@description:
 *@Date:10:56 2017/12/14
 */
+@Service
 public class UserPreferenceService {
     @Autowired
     UserPreferenceMapper userPreferenceMapper;

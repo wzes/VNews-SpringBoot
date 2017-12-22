@@ -149,7 +149,7 @@ public class UserService {
     }
 
     /**
-     *
+     * TODO
      * @param userID
      * @param file
      * @return
@@ -166,7 +166,7 @@ public class UserService {
                     new File("image/user/" + filename)));
             buffStream.write(bytes);
             buffStream.close();
-            userMapper.updatePhoto(userID);
+            userMapper.updatePhoto(userID, "");
 
         } catch (IOException |RuntimeException e ) {
             code = 500;

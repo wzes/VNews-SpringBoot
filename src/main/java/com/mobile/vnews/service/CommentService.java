@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * @author xuantang
  */
+@Service
 public class CommentService {
     @Autowired
     CommentMapper commentMapper;

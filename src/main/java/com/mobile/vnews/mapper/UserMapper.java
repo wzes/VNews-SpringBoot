@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.*;
 public interface UserMapper {
 
     @Insert("INSERT INTO user (ID, username, password, telephone) " +
-            "VALUES (#{ID}, #{username}, #{password}, #{telephone})")
+            "VALUES (#{id}, #{username}, #{password}, #{telephone})")
     int addUser(User user);
 
     @Select("SELECT ID, username, email, sex, birthday, image, telephone, motto, info, " +

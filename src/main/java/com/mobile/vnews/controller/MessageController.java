@@ -4,6 +4,7 @@ package com.mobile.vnews.controller;
 *@description:
 *@Date:11:26 2017/12/14
 */
+import com.alibaba.fastjson.JSON;
 import com.mobile.vnews.module.BasicResponse;
 import com.mobile.vnews.module.bean.Message;
 import com.mobile.vnews.service.NoticeService;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequestMapping("/vnews")
 @RestController
 public class MessageController {
+
     @Autowired
     NoticeService noticeService;
 
@@ -23,7 +25,7 @@ public class MessageController {
      * @param user_id
      * @return
      */
-    @RequestMapping(value = "/notice/{user_id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/message/{user_id}",method = RequestMethod.GET)
     public BasicResponse<List<Message>> getNoticeByUserID(@PathVariable("user_id") String user_id) {
         return noticeService.getMessagesByID(user_id);
     }

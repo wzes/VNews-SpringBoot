@@ -32,7 +32,8 @@ public class CommentController {
      * @return
      */
     @RequestMapping(value = "/comment/{news_id}/{floor}",method = RequestMethod.GET)
-    public BasicResponse<List<Comment>> getDetailComments(@PathVariable("news_id")int news_id, @PathVariable("floor")int floor) {
+    public BasicResponse<List<Comment>> getDetailComments(@PathVariable("news_id")int news_id,
+                                                          @PathVariable("floor")int floor) {
         return commentService.getCommentByNewsIDAndFloor(news_id, floor);
     }
 
@@ -42,9 +43,10 @@ public class CommentController {
      * @param comment_id
      * @return
      */
-    @RequestMapping(value = "/comment/{user_id}/like/{comment_id}",method = RequestMethod.GET)
-    public BasicResponse<String> likeComment(@PathVariable("user_id") String user_id,@PathVariable("comment_id") int comment_id) {
-        return commentService.likeComments(user_id,comment_id);
+    @RequestMapping(value = "/comment/{user_id}/like/{comment_id}", method = RequestMethod.GET)
+    public BasicResponse<String> likeComment(@PathVariable("user_id") String user_id,
+                                             @PathVariable("comment_id") int comment_id) {
+        return commentService.likeComments(user_id, comment_id);
     }
 
     /**
@@ -53,8 +55,9 @@ public class CommentController {
      * @param comment_id
      * @return
      */
-    @RequestMapping(value = "/comment/{user_id}/dislike/{comment_id}",method = RequestMethod.GET)
-    public   BasicResponse<String> dislikeComment(@PathVariable("user_id")String user_id,@PathVariable("comment_id") int comment_id) {
+    @RequestMapping(value = "/comment/{user_id}/dislike/{comment_id}", method = RequestMethod.GET)
+    public BasicResponse<String> dislikeComment(@PathVariable("user_id")String user_id,
+                                                  @PathVariable("comment_id") int comment_id) {
         return commentService.dislikeComments(user_id,comment_id);
     }
 
@@ -64,8 +67,20 @@ public class CommentController {
      * @param comment_id
      * @return
      */
-    @RequestMapping(value="/comment/{user_id}/check/{comment_id}",method = RequestMethod.GET)
-    public  BasicResponse<String> checkComment(@PathVariable("user_id")String user_id,@PathVariable("comment_id")int comment_id) {
-        return  commentService.checkComments(user_id,comment_id);
+    @RequestMapping(value="/comment/{user_id}/check/{comment_id}", method = RequestMethod.GET)
+    public BasicResponse<String> checkComment(@PathVariable("user_id") String user_id,
+                                               @PathVariable("comment_id") int comment_id) {
+        return  commentService.checkComments(user_id, comment_id);
+    }
+
+    /**
+     * 获取
+     * TODO
+     * @param user_id
+     * @return
+     */
+    @RequestMapping(value="/comment/user/{user_id}", method = RequestMethod.GET)
+    public BasicResponse<Comment> getMyComments(@PathVariable("user_id") String user_id) {
+        return null;
     }
 }

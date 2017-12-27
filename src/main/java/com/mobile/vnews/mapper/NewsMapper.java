@@ -122,7 +122,7 @@ public  interface NewsMapper {
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
-            "FROM news, like_news WHERE ID = like_news.newsID AND userID = #{userID}")
+            "FROM news, view_news WHERE ID = view_news.newsID AND userID = #{userID}")
     List<News> getViewNewsByUserID(String userID);
 }
 

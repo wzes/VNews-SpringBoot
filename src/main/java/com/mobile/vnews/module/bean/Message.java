@@ -21,12 +21,12 @@ public class Message {
     private String fromID;
     private String toID;
     private String content;
-    private Timestamp timestamp;
-
+    private long timestamp;
     /**
      *  add after
      */
     private String title;
+    private String toUsername;
     private String fromImage;
     private String fromUsername;
 
@@ -42,6 +42,14 @@ public class Message {
 //    public void setRelationID(String relationID) {
 //        this.relationID = relationID;
 //    }
+
+    public String getToUsername() {
+        return toUsername;
+    }
+
+    public void setToUsername(String toUsername) {
+        this.toUsername = toUsername;
+    }
 
     public String getTitle() {
         return title;
@@ -109,11 +117,11 @@ public class Message {
         this.content = content;
     }
 
-    public Timestamp getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class NoticeService{
+
     @Autowired
     MessageMapper messageMapper;
 
@@ -25,9 +26,10 @@ public class NoticeService{
         BasicResponse<List<Message>> response = new BasicResponse<>();
         int code = 200;
         String message = "get notice by user ID success";
+        List<Message> messages = null;
         try{
-            List<Message> notice = messageMapper.getMessagesByUserID(user_id);
-            if(notice.isEmpty()) {
+            messages = messageMapper.getMessagesByUserID(user_id);
+            if(messages.isEmpty()) {
                 code = 400;
                 message = "didn't have notice";
             }
@@ -35,6 +37,9 @@ public class NoticeService{
             code = 500;
             message = e.getMessage();
         }
+        response.setCode(code);
+        response.setMessage(message);
+        response.setContent(messages);
         return response;
     }
 }

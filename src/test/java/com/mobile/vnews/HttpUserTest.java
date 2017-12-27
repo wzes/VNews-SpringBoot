@@ -33,7 +33,30 @@ public class HttpUserTest {
             e.printStackTrace();
         }
     }
+    /**
+     * Login Test
+     */
+    @Test
+    public void PostLoginTest() {
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        RequestBody formBody = new FormBody.Builder()
+                .add("username", "Hadoop")
+                .add("password", "12346")
+                .build();
+        Request request = new Request.Builder()
+                .url("http://localhost:9909/vnews/login")
+                .header("Content-Type", "application/json")
+                .post(formBody)
+                .build();
+        Call call = mOkHttpClient.newCall(request);
 
+        try {
+            Response response = call.execute();
+            System.out.println(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Login Test
      */

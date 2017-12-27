@@ -130,19 +130,19 @@ public class CommentService {
      * @param comment_id
      * @return
      */
-    public BasicResponse<String> checkComments(String user_id,int comment_id) {
-        BasicResponse<String> response=new BasicResponse<>();
-        int code=200;
+    public BasicResponse<String> checkComments(String user_id, int comment_id) {
+        BasicResponse<String> response = new BasicResponse<>();
+        int code = 200;
         String message="have liked the comment";
         try {
-            Comment comment=commentMapper.checkLikeComment(user_id, comment_id);
+            Comment comment = commentMapper.checkLikeComment(user_id, comment_id);
             if(comment==null) {
-                code=400;
-                message="have not liked the comment";
+                code = 400;
+                message = "have not liked the comment";
             }
         }catch ( Exception e) {
-            code=500;
-            message=e.getMessage();
+            code = 500;
+            message = e.getMessage();
         }
         response.setCode(code);
         response.setMessage(message);

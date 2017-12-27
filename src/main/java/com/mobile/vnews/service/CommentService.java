@@ -33,8 +33,8 @@ public class CommentService {
         try{
             List<Comment> comments=commentMapper.getCommentByNewsID(news_id);
             if(comments.isEmpty()){
-                code = 400;
-                message = "数据库查询语句错误";
+                code = 200;
+                message = "null";
             }else{
                 response.setContent(comments);
             }
@@ -46,7 +46,31 @@ public class CommentService {
         response.setMessage(message);
         return response;
     }
-
+    /**
+     *
+     * @param user_id
+     * @return
+     */
+    public BasicResponse<List<Comment>> getMyComment(String user_id) {
+        BasicResponse<List<Comment>> response = new BasicResponse<>();
+        int code = 200;
+        String message = "return success";
+        try{
+            List<Comment> comments = commentMapper.getCommentsByUserID(user_id);
+            if(comments.isEmpty()){
+                code = 200;
+                message = "null";
+            }else{
+                response.setContent(comments);
+            }
+        }catch (Exception e){
+            code = 500;
+            message = e.getMessage();
+        }
+        response.setCode(code);
+        response.setMessage(message);
+        return response;
+    }
     /**
      * 返回某个新闻某个楼层所有的评论
      * @param news_id
@@ -135,8 +159,8 @@ public class CommentService {
         int code = 200;
         String message="have liked the comment";
         try {
-            Comment comment = commentMapper.checkLikeComment(user_id, comment_id);
-            if(comment==null) {
+            int res = commentMapper.checkLikeComment(user_id, comment_id);
+            if(res == 0) {
                 code = 400;
                 message = "have not liked the comment";
             }

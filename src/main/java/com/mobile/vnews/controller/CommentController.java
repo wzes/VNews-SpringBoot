@@ -70,7 +70,7 @@ public class CommentController {
     @RequestMapping(value="/comment/{user_id}/check/{comment_id}", method = RequestMethod.GET)
     public BasicResponse<String> checkComment(@PathVariable("user_id") String user_id,
                                                @PathVariable("comment_id") int comment_id) {
-        return  commentService.checkComments(user_id, comment_id);
+        return commentService.checkComments(user_id, comment_id);
     }
 
     /**
@@ -80,7 +80,7 @@ public class CommentController {
      * @return
      */
     @RequestMapping(value="/comment/user/{user_id}", method = RequestMethod.GET)
-    public BasicResponse<Comment> getMyComments(@PathVariable("user_id") String user_id) {
-        return null;
+    public BasicResponse<List<Comment>> getMyComments(@PathVariable("user_id") String user_id) {
+        return commentService.getMyComment(user_id);
     }
 }

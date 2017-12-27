@@ -22,8 +22,21 @@ public interface CommentMapper {
             "FROM comment, user as fromUser\n" +
             "WHERE fromUser.ID = comment.fromID AND newsID = #{newsID} " +
             "AND (toID IS NULL OR toID = '') ORDER BY floor ASC")
-    List<Comment>getCommentByNewsID(int newsID);
+    List<Comment> getCommentByNewsID(int newsID);
 
+    /**
+     *
+     * @param userID
+     * @return
+     */
+    @Select("SELECT comment.ID, fromID, fromUser.image as fromImage, fromUser.username as fromUsername,\n" +
+            "  toID, toUser.image as toImage, toUser.username as toUsername,\n" +
+            "  content, timestamp, newsID, floor,\n" +
+            "  (SELECT count(*) FROM like_comment WHERE commentID = comment.ID) as likeCount\n" +
+            "FROM comment, user as fromUser, user as toUser\n" +
+            "WHERE fromUser.ID = comment.fromID AND toUser.ID = comment.toID AND\n" +
+            "      comment.fromID = #{userID} ORDER BY timestamp ASC")
+    List<Comment> getCommentsByUserID(String userID);
     /**
      * Get comments from one floor
      * @param floor
@@ -36,7 +49,7 @@ public interface CommentMapper {
             "FROM comment, user as fromUser, user as toUser\n" +
             "WHERE fromUser.ID = comment.fromID AND toUser.ID = comment.toID AND newsID = #{arg0}" +
             " AND floor = #{arg1} ORDER BY timestamp ASC")
-    List<Comment>getCommentByNewsIDAndFloor(int newsID, int floor);
+    List<Comment> getCommentByNewsIDAndFloor(int newsID, int floor);
 
     /**
      * 点赞
@@ -63,7 +76,7 @@ public interface CommentMapper {
      * @return
      */
     @Select("SELECT count(*) FROM like_comment WHERE userID = #{arg0} AND commentID = #{arg1}")
-    Comment checkLikeComment(String userID, int commentID);
+    int checkLikeComment(String userID, int commentID);
 
     /**
      * 添加评论

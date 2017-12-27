@@ -309,3 +309,6 @@
 [18:38:34:391] [INFO] - org.springframework.boot.StartupInfoLogger.logStarting(StartupInfoLogger.java:48) - Starting VNewsApplication on xuantang-cun with PID 16800 (/home/xuantang/IdeaProjects/VNews-SpringBoot/target/classes started by xuantang in /home/xuantang/IdeaProjects/VNews-SpringBoot)
 [18:38:34:395] [INFO] - org.springframework.boot.SpringApplication.logStartupProfileInfo(SpringApplication.java:593) - No active profile set, falling back to default profiles: default
 [18:38:36:094] [INFO] - org.springframework.boot.StartupInfoLogger.logStarted(StartupInfoLogger.java:57) - Started VNewsApplication in 1.86 seconds (JVM running for 2.366)
+[19:34:51:719] [INFO] - org.springframework.boot.StartupInfoLogger.logStarting(StartupInfoLogger.java:48) - Starting VNewsApplication on xuantang-cun with PID 19798 (/home/xuantang/IdeaProjects/VNews-SpringBoot/target/classes started by xuantang in /home/xuantang/IdeaProjects/VNews-SpringBoot)
+[19:34:51:724] [INFO] - org.springframework.boot.SpringApplication.logStartupProfileInfo(SpringApplication.java:593) - No active profile set, falling back to default profiles: default
+[19:34:53:825] [INFO] - org.springframework.boot.StartupInfoLogger.logStarted(StartupInfoLogger.java:57) - Started VNewsApplication in 2.301 seconds (JVM running for 2.924)

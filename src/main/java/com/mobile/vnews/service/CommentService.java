@@ -27,9 +27,7 @@ public class CommentService {
         String message = "return main floor information success";
         try{
             List<Comment> comments = commentMapper.getCommentByNewsID(news_id);
-//            if (comments.size() > 0) {
-//                System.out.println(JSON.toJSONString(comments.get(0)));
-//            }
+
             if (comments.isEmpty()) {
                 code = 200;
                 message = "null";
@@ -55,9 +53,7 @@ public class CommentService {
         String message = "return main floor information success";
         try{
             List<Comment> comments = commentMapper.getCommentByNewsIDAndUserID(news_id, user_id);
-//            if (comments.size() > 0) {
-//                System.out.println(JSON.toJSONString(comments.get(0)));
-//            }
+
             if(comments.isEmpty()){
                 code = 200;
                 message = "null";

@@ -94,6 +94,27 @@ public class NewsService {
     }
 
     /**
+     * 根据id获取新闻
+     * @param ID
+     * @return
+     */
+    public BasicResponse<News> getNewsByIDAndUserID(int newsID, String user_id) {
+        BasicResponse<News> response = new BasicResponse<>();
+        int code = 200;
+        String message = "success";
+        try{
+            News news = newsMapper.getNewsByIDAndUserID(newsID, user_id);
+            response.setContent(news);
+        }catch (Exception e){
+            code = 500;
+            message = e.getMessage();
+        }
+        response.setCode(code);
+        response.setMessage(message);
+        return response;
+    }
+
+    /**
      *根据用户id获取最喜爱新闻
      * @param UserID
      * @return

@@ -1,6 +1,7 @@
 package com.mobile.vnews.controller;
 
 import com.mobile.vnews.module.BasicResponse;
+import com.mobile.vnews.module.UPmp;
 import com.mobile.vnews.module.UTmp;
 import com.mobile.vnews.module.bean.User;
 import com.mobile.vnews.service.UserService;
@@ -21,25 +22,21 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    
     /**
      * 用户注册
-     * @param username
-     * @param password
-     * @param telephone
+     * @param uPmp
      * @return
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public BasicResponse<String> register(@RequestParam String username,
-                                          @RequestParam String password,
-                                          @RequestParam String telephone){
-        User user = new User(username, password, telephone);
+    public BasicResponse<String> register(@RequestBody UPmp uPmp){
+        User user = new User(uPmp.getUsername(), uPmp.getPassword(), uPmp.getPhone());
         return userService.register(user);
     }
 
     /**
-     * 用户登录
-     * @param username
-     * @param password
+     *
+     * @param uTmp
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)

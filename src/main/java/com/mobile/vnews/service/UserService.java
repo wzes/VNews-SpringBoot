@@ -1,6 +1,7 @@
 package com.mobile.vnews.service;
 
 
+import com.aliyuncs.exceptions.ClientException;
 import com.mobile.vnews.mapper.UserMapper;
 import com.mobile.vnews.module.BasicResponse;
 import com.mobile.vnews.module.bean.User;
@@ -88,7 +89,7 @@ public class UserService {
 
     /**
      *
-     * @param telephone
+     * @param phone
      * @return
      */
     public BasicResponse<String> checkPhone(String phone) {
@@ -99,14 +100,22 @@ public class UserService {
         try {
             int res = userMapper.checkTelephone(phone);
             if(res > 0) {
-                code = 403;
+                code = 200;
                 message = "phone not available";
                 content = "false";
             } else {
                 SmsSender smsSender = new SmsSender();
                 try{
                     int randNum = 1 + (int)(Math.random()*((999999-1) + 1));
-    			    smsSender.sendMessage(phone, randNum);
+                    new Thread(() -> {
+                        try {
+                            smsSender.sendMessage(phone, randNum);
+                        } catch (ClientException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
                     content = String.valueOf(randNum);
     		    }catch (Exception e){
     		        e.getMessage();

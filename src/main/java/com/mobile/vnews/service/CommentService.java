@@ -53,7 +53,6 @@ public class CommentService {
         String message = "return main floor information success";
         try{
             List<Comment> comments = commentMapper.getCommentByNewsIDAndUserID(news_id, user_id);
-
             if(comments.isEmpty()){
                 code = 200;
                 message = "null";

@@ -63,7 +63,8 @@ public interface CommentMapper {
      * @return
      */
     @Select("SELECT comment.ID, fromID, fromUser.image as fromImage, fromUser.username as fromUsername,\n" +
-            "  toID, toUser.image as toImage, toUser.username as toUsername,\n" +
+            "  toID, (SELECT username FROM user AS toUser WHERE comment.toID = toUser.ID) AS toUsername,\n" +
+            "  (SELECT image FROM user AS toUser WHERE comment.toID = toUser.ID) AS toImage,\n" +
             "  content, timestamp, newsID, floor,\n" +
             "  (SELECT count(*) FROM like_comment WHERE commentID = comment.ID) as likeCount,\n" +
             "   CASE (SELECT count(*)\n" +
@@ -72,8 +73,8 @@ public interface CommentMapper {
             "           WHEN 0 THEN FALSE\n" +
             "           ELSE TRUE\n" +
             "          END AS isLike\n" +
-            "FROM comment, user as fromUser, user as toUser\n" +
-            "WHERE fromUser.ID = comment.fromID AND toUser.ID = comment.toID AND\n" +
+            "FROM comment, user as fromUser\n" +
+            "WHERE fromUser.ID = comment.fromID AND\n" +
             "      comment.fromID = #{userID} ORDER BY timestamp ASC")
     List<Comment> getCommentsByUserIDAndUserID(@Param("userID") String userID);
 

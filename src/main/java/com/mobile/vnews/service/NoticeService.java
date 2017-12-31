@@ -22,15 +22,15 @@ public class NoticeService{
      * @param user_id
      * @return
      */
-    public BasicResponse<List<Message>> getMessagesByID(String user_id) {
+    public BasicResponse<List<Message>> getMessagesByID(String user_id, long timestamp) {
         BasicResponse<List<Message>> response = new BasicResponse<>();
         int code = 200;
         String message = "get notice by user ID success";
         List<Message> messages = null;
         try{
-            messages = messageMapper.getMessagesByUserID(user_id);
+            messages = messageMapper.getMessagesByUserID(user_id, timestamp);
             if(messages.isEmpty()) {
-                code = 400;
+                code = 200;
                 message = "didn't have notice";
             }
         }catch (Exception e) {

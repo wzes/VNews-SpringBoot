@@ -65,7 +65,6 @@ public class UserController {
     @RequestMapping(value = "/user", method = RequestMethod.PUT)
     @ResponseBody
     public BasicResponse<String> updateUser(@RequestBody User user){
-        System.out.println(user.getId());
         return userService.updateUser(user);
     }
 
@@ -75,10 +74,10 @@ public class UserController {
      * @param file
      * @return
      */
-    @RequestMapping(value = "/user/{ID}/image", method = RequestMethod.POST)
-    public BasicResponse<String>updatePhoto(@PathVariable("ID")String ID,
+    @RequestMapping(value = "/user/{user_id}/photo", method = RequestMethod.POST)
+    public BasicResponse<String>updatePhoto(@PathVariable("user_id")String user_id,
                                             @RequestParam("photo") MultipartFile file){
-        return userService.updatePhoto(ID, file);
+        return userService.updatePhoto(user_id, file);
     }
 
     /**
@@ -86,8 +85,8 @@ public class UserController {
      * @param ID
      * @return
      */
-    @RequestMapping(value = "/user/{ID}", method = RequestMethod.GET)
-    public BasicResponse<User> getUser(@PathVariable("ID") String ID){
-        return userService.getUser(ID);
+    @RequestMapping(value = "/user/{user_id}", method = RequestMethod.GET)
+    public BasicResponse<User> getUser(@PathVariable("user_id") String user_id){
+        return userService.getUser(user_id);
     }
 }

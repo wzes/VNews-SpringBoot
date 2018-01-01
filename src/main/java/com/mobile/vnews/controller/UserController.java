@@ -1,6 +1,7 @@
 package com.mobile.vnews.controller;
 
 import com.mobile.vnews.module.BasicResponse;
+import com.mobile.vnews.module.UPmp;
 import com.mobile.vnews.module.UTmp;
 import com.mobile.vnews.module.bean.User;
 import com.mobile.vnews.service.UserService;
@@ -21,25 +22,21 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    
     /**
      * 用户注册
-     * @param username
-     * @param password
-     * @param telephone
+     * @param uPmp
      * @return
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public BasicResponse<String> register(@RequestParam String username,
-                                          @RequestParam String password,
-                                          @RequestParam String telephone){
-        User user = new User(username, password, telephone);
+    public BasicResponse<String> register(@RequestBody UPmp uPmp){
+        User user = new User(uPmp.getUsername(), uPmp.getPassword(), uPmp.getPhone());
         return userService.register(user);
     }
 
     /**
-     * 用户登录
-     * @param username
-     * @param password
+     *
+     * @param uTmp
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -67,21 +64,21 @@ public class UserController {
      */
     @RequestMapping(value = "/user", method = RequestMethod.PUT)
     @ResponseBody
-    public BasicResponse<String> updateUser(@RequestBody User user){
-        System.out.println(user.getId());
+    public BasicResponse<User> updateUser(@RequestBody User user){
         return userService.updateUser(user);
     }
 
     /**
      * 上传图片
-     * @param ID
+     * @param user_id
      * @param file
      * @return
      */
-    @RequestMapping(value = "/user/{ID}/image", method = RequestMethod.POST)
-    public BasicResponse<String>updatePhoto(@PathVariable("ID")String ID,
+    @RequestMapping(value = "/user/{user_id}/photo", method = RequestMethod.POST)
+    public BasicResponse<String>updatePhoto(@PathVariable("user_id")String user_id,
                                             @RequestParam("photo") MultipartFile file){
-        return userService.updatePhoto(ID, file);
+        System.out.println(user_id);
+        return userService.updatePhoto(user_id, file);
     }
 
     /**
@@ -89,8 +86,8 @@ public class UserController {
      * @param ID
      * @return
      */
-    @RequestMapping(value = "/user/{ID}", method = RequestMethod.GET)
-    public BasicResponse<User> getUser(@PathVariable("ID") String ID){
-        return userService.getUser(ID);
+    @RequestMapping(value = "/user/{user_id}", method = RequestMethod.GET)
+    public BasicResponse<User> getUser(@PathVariable("user_id") String user_id){
+        return userService.getUser(user_id);
     }
 }

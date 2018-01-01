@@ -41,7 +41,7 @@ public class HttpNewsTest {
     public void GetDetailTest() {
         OkHttpClient mOkHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://localhost:9909/vnews/news/detail/4")
+                .url("http://localhost:9909/vnews/news/detail/2")
                 .header("Content-Type", "application/json")
                 .build();
         Call call = mOkHttpClient.newCall(request);

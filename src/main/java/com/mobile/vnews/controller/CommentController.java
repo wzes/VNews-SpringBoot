@@ -26,16 +26,41 @@ public class CommentController {
     }
 
     /**
+     *
+     * @param news_id
+     * @param user_id
+     * @return
+     */
+    @RequestMapping(value = "/comment/user/{user_id}/news/{news_id}", method = RequestMethod.GET)
+    public BasicResponse<List<Comment>> getMainComments(@PathVariable("user_id") String user_id,
+                                                        @PathVariable("news_id") int news_id) {
+        return commentService.getMainFloorByUserID(news_id, user_id);
+    }
+
+    /**
      * 得到某一层的详细评论
      * @param news_id
      * @param floor
      * @return
      */
     @RequestMapping(value = "/comment/{news_id}/{floor}",method = RequestMethod.GET)
-    public BasicResponse<List<Comment>> getDetailComments(@PathVariable("news_id")int news_id,
-                                                          @PathVariable("floor")int floor) {
+    public BasicResponse<List<Comment>> getDetailComments(@PathVariable("news_id") int news_id,
+                                                          @PathVariable("floor") int floor) {
         return commentService.getCommentByNewsIDAndFloor(news_id, floor);
     }
+    /**
+     * 得到某一层的详细评论
+     * @param news_id
+     * @param floor
+     * @return
+     */
+    @RequestMapping(value = "/comment/user/{user_id}/news/{news_id}/{floor}",method = RequestMethod.GET)
+    public BasicResponse<List<Comment>> getDetailComments(@PathVariable("news_id") int news_id,
+                                                          @PathVariable("floor") int floor,
+                                                          @PathVariable("user_id") String user_id) {
+        return commentService.getCommentByNewsIDAndFloorAndUserID(news_id, floor, user_id);
+    }
+
 
     /**
      * 给某条评论点赞
@@ -58,7 +83,7 @@ public class CommentController {
     @RequestMapping(value = "/comment/{user_id}/dislike/{comment_id}", method = RequestMethod.GET)
     public BasicResponse<String> dislikeComment(@PathVariable("user_id")String user_id,
                                                   @PathVariable("comment_id") int comment_id) {
-        return commentService.dislikeComments(user_id,comment_id);
+        return commentService.dislikeComments(user_id, comment_id);
     }
 
     /**

@@ -22,6 +22,15 @@ public class User {
     /*--------------------*/
     private int likeNewsCount;
     private int viewNewsCount;
+    private int commentCount;
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
 
     public int getLikeNewsCount() {
         return likeNewsCount;

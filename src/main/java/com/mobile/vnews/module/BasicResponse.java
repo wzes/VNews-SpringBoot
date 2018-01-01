@@ -3,7 +3,9 @@ package com.mobile.vnews.module;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * Created by xuantang on 11/30/17.
+ *
+ * @author xuantang
+ * @date 11/30/17
  */
 
 public class BasicResponse<T> {

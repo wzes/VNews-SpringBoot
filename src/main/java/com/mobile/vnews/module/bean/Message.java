@@ -16,7 +16,7 @@ public class Message {
      * content   TEXT                                NOT NULL,
      * timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
      */
-    private int ID;
+    private int id;
     private String newsID;
     private String fromID;
     private String toID;
@@ -29,8 +29,16 @@ public class Message {
     private String toUsername;
     private String fromImage;
     private String fromUsername;
+    private String floor;
 
-//    /**
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+    //    /**
 //     * Relation user for submitting
 //     */
 //    private String relationID;
@@ -77,12 +85,12 @@ public class Message {
 
     /* --------------------------------------------- */
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNewsID() {

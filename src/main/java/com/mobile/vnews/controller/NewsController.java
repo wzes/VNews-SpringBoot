@@ -63,6 +63,18 @@ public class NewsController {
     }
 
     /**
+     *
+     * @param news_id
+     * @param user_id
+     * @return
+     */
+    @RequestMapping(value="/detail/{user_id}/{news_id}",method = RequestMethod.GET)
+    public BasicResponse<News> detail(@PathVariable("news_id") int news_id,
+                                      @PathVariable("user_id") String user_id){
+        return newsService.getNewsByIDAndUserID(news_id, user_id);
+    }
+
+    /**
      * 根据用户id得到用户喜爱的新闻
      * @param user_id
      * @return

@@ -17,7 +17,8 @@ public interface UserMapper {
 
     @Select("SELECT ID, username, email, sex, birthday, image, telephone, motto, info, " +
             "(SELECT count(*) FROM like_news WHERE ID = like_news.userID) AS likeNewsCount, " +
-            "(SELECT count(*) FROM view_news WHERE ID = view_news.userID) AS viewNewsCount " +
+            "(SELECT count(*) FROM view_news WHERE ID = view_news.userID) AS viewNewsCount," +
+            "(SELECT count(*) FROM comment WHERE user.ID = comment.fromID) AS commentCount " +
             "FROM user " +
             "WHERE username = #{arg0} AND password = #{arg1}")
     User findUserByUsername(String username, String password);
@@ -33,11 +34,16 @@ public interface UserMapper {
     int updatePhoto(@Param("userID") String userID,
                     @Param("image")String image);
 
-    // TODO
-    @Update("UPDATE user SET password = #{password}, " +
+
+    /**
+     *  // TODO
+     * @param user
+     */
+    @Update("UPDATE user SET info = #{info}, telephone = #{telephone}, " +
             "email = #{email}, sex = #{sex}, birthday= #{birthday}, motto = #{motto}, username = #{username}" +
             "WHERE ID = #{id}")
-    int updateUser(User user);
+    void updateUser(User user);
+
 
     @Select("SELECT count(telephone) FROM user WHERE telephone = #{telephone}")
     int checkTelephone(String telephone);
@@ -50,14 +56,16 @@ public interface UserMapper {
      */
     @Select("SELECT ID, username, email, sex, birthday, image, telephone, motto, info,\n" +
             "  (SELECT count(*) FROM like_news WHERE ID = like_news.userID) AS likeNewsCount,\n" +
-            "  (SELECT count(*) FROM view_news WHERE ID = view_news.userID) AS viewNewsCount\n" +
+            "  (SELECT count(*) FROM view_news WHERE ID = view_news.userID) AS viewNewsCount," +
+            "(SELECT count(*) FROM comment WHERE user.ID = comment.fromID) AS commentCount\n" +
             "FROM user\n" +
             "WHERE telephone = #{arg0} AND password = #{arg1}")
     User findUserByTelephone(String telephone, String password);
 
     @Select("SELECT ID, username, email, sex, birthday, image, telephone, motto, info,\n" +
             "  (SELECT count(*) FROM like_news WHERE ID = like_news.userID) AS likeNewsCount,\n" +
-            "  (SELECT count(*) FROM view_news WHERE ID = view_news.userID) AS viewNewsCount\n" +
+            "  (SELECT count(*) FROM view_news WHERE ID = view_news.userID) AS viewNewsCount," +
+            "(SELECT count(*) FROM comment WHERE user.ID = comment.fromID) AS commentCount\n" +
             "FROM user\n" +
             "WHERE ID = #{userID}")
     User getUser(String userID);

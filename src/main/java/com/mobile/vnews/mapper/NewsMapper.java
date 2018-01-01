@@ -19,7 +19,8 @@ public  interface NewsMapper {
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
-            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
+            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
+            "0 AS isLike\n" +
             "  FROM news limit #{start}, #{count}")
     List<News> getNews(@Param("start") int start, @Param("count") int count);
 
@@ -31,7 +32,8 @@ public  interface NewsMapper {
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
-            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
+            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
+            "0 AS isLike\n" +
             "  FROM news")
     List<News> getAllNews();
     /**
@@ -42,7 +44,8 @@ public  interface NewsMapper {
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
-            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
+            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
+            "0 AS isLike\n" +
             "  FROM news WHERE type = #{type}")
     List<News> getAllNewsByType(String type);
 
@@ -56,7 +59,8 @@ public  interface NewsMapper {
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
-            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
+            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
+            "0 AS isLike\n" +
             "  FROM news WHERE type = #{type} limit #{start}, #{count}")
     List<News> getNewsByType(@Param("type") String type,
                              @Param("start") int start,
@@ -70,7 +74,8 @@ public  interface NewsMapper {
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  ((SELECT count(newsID) FROM like_news WHERE newsID = news.ID) + \n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) +  \n" +
-            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID)) as rank\n" +
+            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID)) as rank," +
+            "0 AS isLike\n" +
             "  FROM news ORDER BY rank DESC limit #{count}")
     List<News> getHotNews(int count);
 
@@ -88,13 +93,32 @@ public  interface NewsMapper {
 
     /**
      * Add likeCount and viewCount
+     * @param ID
+     * @return
+     */
+    @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
+            "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
+            "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
+            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
+            "CASE (SELECT count(*)\n" +
+            "              FROM like_news\n" +
+            "              WHERE newsID = ID AND userID = #{UserID})\n" +
+            "           WHEN 0 THEN FALSE\n" +
+            "           ELSE TRUE\n" +
+            "          END AS isLike\n" +
+            "  FROM news WHERE ID = #{ID}")
+    News getNewsByIDAndUserID(@Param("ID") int ID,
+                              @Param("UserID") String UserID);
+    /**
+     * Add likeCount and viewCount
      * @param userID
      * @return
      */
     @Select("SELECT ID, title, author, description, image, publishedAt, source, content, level, type,\n" +
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
-            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
+            "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
+            " 1 AS isLike\n" +
             "  FROM news, like_news WHERE ID = like_news.newsID AND userID = #{userID}")
     List<News> getFavoriteNewsByUserID(String userID);
 

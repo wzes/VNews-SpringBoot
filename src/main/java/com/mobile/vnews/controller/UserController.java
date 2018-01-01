@@ -64,19 +64,20 @@ public class UserController {
      */
     @RequestMapping(value = "/user", method = RequestMethod.PUT)
     @ResponseBody
-    public BasicResponse<String> updateUser(@RequestBody User user){
+    public BasicResponse<User> updateUser(@RequestBody User user){
         return userService.updateUser(user);
     }
 
     /**
      * 上传图片
-     * @param ID
+     * @param user_id
      * @param file
      * @return
      */
     @RequestMapping(value = "/user/{user_id}/photo", method = RequestMethod.POST)
     public BasicResponse<String>updatePhoto(@PathVariable("user_id")String user_id,
                                             @RequestParam("photo") MultipartFile file){
+        System.out.println(user_id);
         return userService.updatePhoto(user_id, file);
     }
 

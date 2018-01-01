@@ -109,12 +109,12 @@ public class HttpUserTest {
     public void PutUpdateTest() {
         OkHttpClient mOkHttpClient = new OkHttpClient();
         User user = new User();
-        user.setId("e8dbf7128a90432bbc80");
-        user.setMotto("Hello World!");
+        user.setId("013cc199af6c4d56b9d9");
+        user.setMotto("为战而生，至死方休");
         user.setUsername("Phoenix");
         user.setPassword("123456");
         user.setBirthday("1996-04-27");
-        user.setImage("abc.jpg");
+        user.setImage("http://118.89.111.157/vnews/users/013cc199af6c4d56b9d9.jpg");
         user.setEmail("test@163.com");
         user.setInfo("Hello World");
         user.setSex("male");

@@ -1,6 +1,7 @@
 package com.mobile.vnews.service;
 
 
+import com.alibaba.fastjson.JSON;
 import com.aliyuncs.exceptions.ClientException;
 import com.mobile.vnews.mapper.UserMapper;
 import com.mobile.vnews.module.BasicResponse;
@@ -137,23 +138,21 @@ public class UserService {
      * @param user
      * @return
      */
-    public BasicResponse<String> updateUser(User user)  {
-        BasicResponse<String> response = new BasicResponse<>();
+    public BasicResponse<User> updateUser(User user)  {
+        BasicResponse<User> response = new BasicResponse<>();
         int code = 200;
         String message = "update success";
-        response.setContent("");
         try{
-            int res = userMapper.updateUser(user);
-            if(res == 0) {
-                code = 400;
-                message = "update fail";
-            }
+            // System.out.println(JSON.toJSONString(user));
+            userMapper.updateUser(user);
+            response.setContent(userMapper.getUser(user.getId()));
         }catch (Exception e){
             code = 500;
-            message = e.getMessage();
+            message = "update fail";
         }
         response.setCode(code);
         response.setMessage(message);
+
         return response;
     }
 
@@ -170,12 +169,13 @@ public class UserService {
         response.setContent("");
         try {
             String filename = file.getOriginalFilename();
+            System.out.println();
             byte[] bytes = file.getBytes();
             BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(
-                    new File("image/user/" + filename)));
+                    new File("/d1/" + userID + filename.substring(filename.lastIndexOf(".")))));
             buffStream.write(bytes);
             buffStream.close();
-            userMapper.updatePhoto(userID, "");
+            //userMapper.updatePhoto(userID, filename);
 
         } catch (IOException |RuntimeException e ) {
             code = 500;

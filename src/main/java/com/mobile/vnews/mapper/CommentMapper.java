@@ -2,6 +2,7 @@ package com.mobile.vnews.mapper;
 
 import com.mobile.vnews.module.bean.Comment;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author xuantang
  */
 @Mapper
+@Service
 public interface CommentMapper {
 
     /**

@@ -1,6 +1,5 @@
 package com.mobile.vnews.service;
 
-import com.alibaba.fastjson.JSON;
 import com.mobile.vnews.mapper.CommentMapper;
 import com.mobile.vnews.module.BasicResponse;
 import com.mobile.vnews.module.bean.Comment;
@@ -13,6 +12,7 @@ import java.util.List;
  */
 @Service
 public class CommentService {
+
     @Autowired
     CommentMapper commentMapper;
 

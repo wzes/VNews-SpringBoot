@@ -1,6 +1,5 @@
 package com.mobile.vnews.module.bean;
 
-import java.security.Timestamp;
 
 /**
  *

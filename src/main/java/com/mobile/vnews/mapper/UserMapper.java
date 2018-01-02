@@ -2,6 +2,7 @@ package com.mobile.vnews.mapper;
 
 import com.mobile.vnews.module.bean.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Create by xuantang
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.*;
  */
 
 @Mapper
+@Service
 public interface UserMapper {
 
     @Insert("INSERT INTO user (ID, username, password, telephone) " +

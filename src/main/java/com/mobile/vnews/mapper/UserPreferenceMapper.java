@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 /**
@@ -13,6 +14,7 @@ import java.util.List;
 *@Date:10:56 2017/12/14
 */
 @Mapper
+@Service
 public interface UserPreferenceMapper {
 
 

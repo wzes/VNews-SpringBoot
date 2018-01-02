@@ -1,11 +1,11 @@
 package com.mobile.vnews.module.bean;
 
-import java.security.Timestamp;
 
 /**
- * Created by xuantang on 11/27/17.
+ *
+ * @author xuantang
+ * @date 11/27/17
  */
-
 public class Message {
     /**
      * ID        INT AUTO_INCREMENT

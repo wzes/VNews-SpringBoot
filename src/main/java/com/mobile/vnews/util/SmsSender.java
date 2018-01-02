@@ -1,5 +1,6 @@
 package com.mobile.vnews.util;
 
+
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dysmsapi.model.v20170525.QuerySendDetailsRequest;
@@ -23,7 +24,7 @@ public class SmsSender {
     static final String accessKeyId = "LTAInFvChBWf1KL1";
     static final String accessKeySecret = "tScGqXmTf2aJfFTUNjQqSj31utNooW";
 
-    private static SendSmsResponse sendSms(String string,int num) throws ClientException {
+    private static SendSmsResponse sendSms(String string, int num) throws ClientException {
 
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");

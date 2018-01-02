@@ -4,7 +4,9 @@ package com.mobile.vnews.module.bean;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * Created by xuantang on 11/27/17.
+ *
+ * @author xuantang
+ * @date 11/27/17
  */
 public class User {
 

@@ -2,6 +2,7 @@ package com.mobile.vnews.mapper;
 
 import com.mobile.vnews.module.bean.Message;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  */
 
 @Mapper
+@Service
 public interface MessageMapper {
 
 

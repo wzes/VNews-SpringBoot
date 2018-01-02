@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by xuantang on 12/8/17.
+ *
+ * @author xuantang
+ * @date 12/8/17
  */
 
 public class PreferenceConstant {

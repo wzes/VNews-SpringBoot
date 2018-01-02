@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping({"/vnews"})
 public class UserController {
 
-
     @Autowired
     UserService userService;
 

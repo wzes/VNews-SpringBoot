@@ -3,11 +3,13 @@ package com.mobile.vnews.mapper;
 
 import com.mobile.vnews.module.bean.News;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Mapper
-public  interface NewsMapper {
+@Service
+public interface NewsMapper {
 
 
     /**
@@ -21,7 +23,7 @@ public  interface NewsMapper {
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
             "0 AS isLike\n" +
-            "  FROM news limit #{start}, #{count}")
+            "  FROM news ORDER BY publishedAt DESC limit #{start}, #{count}")
     List<News> getNews(@Param("start") int start, @Param("count") int count);
 
     /**
@@ -34,7 +36,7 @@ public  interface NewsMapper {
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
             "0 AS isLike\n" +
-            "  FROM news")
+            "  FROM news ORDER BY publishedAt DESC")
     List<News> getAllNews();
     /**
      *
@@ -46,7 +48,7 @@ public  interface NewsMapper {
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
             "0 AS isLike\n" +
-            "  FROM news WHERE type = #{type}")
+            "  FROM news WHERE type = #{type} ORDER BY publishedAt DESC")
     List<News> getAllNewsByType(String type);
 
     /**
@@ -61,7 +63,7 @@ public  interface NewsMapper {
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
             "0 AS isLike\n" +
-            "  FROM news WHERE type = #{type} limit #{start}, #{count}")
+            "  FROM news WHERE type = #{type} ORDER BY publishedAt DESC limit #{start}, #{count}")
     List<News> getNewsByType(@Param("type") String type,
                              @Param("start") int start,
                              @Param("count") int count);
@@ -119,7 +121,7 @@ public  interface NewsMapper {
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount," +
             " 1 AS isLike\n" +
-            "  FROM news, like_news WHERE ID = like_news.newsID AND userID = #{userID}")
+            "  FROM like_news, news WHERE ID = like_news.newsID AND userID = #{userID}")
     List<News> getFavoriteNewsByUserID(String userID);
 
     @Insert("INSERT INTO like_news (userID, newsID) VALUES (#{arg0}, #{arg1})")
@@ -146,7 +148,7 @@ public  interface NewsMapper {
             "  (SELECT count(newsID) FROM like_news WHERE newsID = news.ID) as likeCount,\n" +
             "  (SELECT count(newsID) FROM view_news WHERE newsID = news.ID) as viewCount,\n" +
             "  (SELECT count(newsID) FROM comment WHERE newsID = news.ID) as commentCount\n" +
-            "FROM news, view_news WHERE ID = view_news.newsID AND userID = #{userID}")
+            "FROM view_news, news WHERE ID = view_news.newsID AND userID = #{userID}")
     List<News> getViewNewsByUserID(String userID);
 }
 

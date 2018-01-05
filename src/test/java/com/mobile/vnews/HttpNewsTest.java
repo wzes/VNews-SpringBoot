@@ -1,7 +1,10 @@
 package com.mobile.vnews;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.mobile.vnews.module.BasicResponse;
 import com.mobile.vnews.module.UNTmp;
+import com.mobile.vnews.module.bean.News;
 import okhttp3.*;
 import org.junit.Test;
 
@@ -37,22 +40,26 @@ public class HttpNewsTest {
 //    /**
 //     *
 //     */
-//    @Test
-//    public void GetDetailTest() {
-//        OkHttpClient mOkHttpClient = new OkHttpClient();
-//        Request request = new Request.Builder()
-//                .url("http://localhost:9909/vnews/news/detail/2")
-//                .header("Content-Type", "application/json")
-//                .build();
-//        Call call = mOkHttpClient.newCall(request);
-//
-//        try {
-//            Response response = call.execute();
-//            System.out.println(response.body().string());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Test
+    public void GetDetailTest() {
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://118.89.111.157:9909/vnews/news/detail/013cc199af6c4d56b9d9/2")
+                .header("Content-Type", "application/json")
+                .build();
+        Call call = mOkHttpClient.newCall(request);
+
+        try {
+            Response response = call.execute();
+            JSONObject jsonObject = JSON.parseObject(response.body().string());
+            BasicResponse basicResponse = JSON.toJavaObject(jsonObject, BasicResponse.class);
+            JSONObject jsonObject1 = JSON.parseObject(basicResponse.getContent().toString());
+            News news = JSON.toJavaObject(jsonObject1, News.class);
+            System.out.println(news.isLike());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 //
 //    /**
 //     * Get News Test

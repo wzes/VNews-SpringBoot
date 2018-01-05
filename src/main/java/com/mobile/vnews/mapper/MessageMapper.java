@@ -23,11 +23,12 @@ public interface MessageMapper {
      * @return
      */
     @Select("SELECT notice.ID AS id, notice.fromID, fromUser.username AS fromUsername, fromUser.image AS fromImage,\n" +
-            "  notice.toID, news.title, notice.timestamp, notice.content, newsID,\n" +
-            "  (SELECT username FROM user WHERE ID = notice.toID) AS toUsername\n" +
-            " FROM notice, news, user as fromUser\n" +
-            " WHERE news.ID = notice.newsID AND timestamp >= #{timestamp} AND notice.fromID = #{userID}\n" +
-            " AND fromUser.ID = notice.fromID ORDER BY timestamp DESC")
+            "    notice.toID, news.title, notice.timestamp, notice.content, newsID,\n" +
+            "            (SELECT username FROM user WHERE ID = notice.toID) AS toUsername\n" +
+            "    FROM notice, news, user as fromUser\n" +
+            "    WHERE news.ID = notice.newsID AND timestamp >= #{timestamp} AND notice.newsID in\n" +
+            "            (SELECT notice.newsID FROM notice WHERE notice.fromID = #{userID})\n" +
+            "    AND fromUser.ID = notice.fromID ORDER BY timestamp DESC")
     List<Message> getMessagesByUserID(@Param("userID") String userID,
                                       @Param("timestamp") long timestamp);
 

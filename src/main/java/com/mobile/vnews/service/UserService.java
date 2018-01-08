@@ -172,10 +172,12 @@ public class UserService {
             System.out.println();
             byte[] bytes = file.getBytes();
             BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(
-                    new File("/var/www/html/users/" + userID + filename.substring(filename.lastIndexOf(".")))));
+                    new File("/var/www/html/vnews/users/" + userID + filename.substring(filename.lastIndexOf(".")))));
             buffStream.write(bytes);
             buffStream.close();
-            userMapper.updatePhoto(userID, filename);
+            String mFilename = "http://118.89.111.157/vnews/users/" + userID +
+                    filename.substring(filename.lastIndexOf("."));
+            userMapper.updatePhoto(userID, mFilename);
 
         } catch (IOException |RuntimeException e ) {
             code = 500;

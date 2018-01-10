@@ -340,7 +340,6 @@ CREATE TABLE IF NOT EXISTS view_news (
   返回值：　json{map} 喜好列表
 
 ### Contributor
-
-- 寸宣堂
-- 师凯杰
-- 杜若衡
+- [寸宣堂 1552730](https://github.com/wzes)
+- [师凯杰 1552736](https://github.com/Anifled)
+- [杜若衡 1552649](https://github.com/Wortspiedrh)

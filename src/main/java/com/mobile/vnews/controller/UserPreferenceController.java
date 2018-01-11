@@ -45,7 +45,7 @@ public class UserPreferenceController {
      * @return
      */
     @RequestMapping(value="preference/{user_id}",method = RequestMethod.GET)
-    public BasicResponse<List<String>> getUserPreference(@PathVariable("user_id")String user_id ){
+    public BasicResponse<List<String>> getUserPreference(@PathVariable("user_id")String user_id){
 
         return userPreferenceService.getUserPreference(user_id);
     }

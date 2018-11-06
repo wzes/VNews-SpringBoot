@@ -44,7 +44,7 @@ public class HttpNewsTest {
     public void GetDetailTest() {
         OkHttpClient mOkHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://118.89.111.157:9909/vnews/news/detail/013cc199af6c4d56b9d9/2")
+                .url("http://localhost:9909/vnews/news/detail/013cc199af6c4d56b9d9/2")
                 .header("Content-Type", "application/json")
                 .build();
         Call call = mOkHttpClient.newCall(request);
@@ -64,22 +64,22 @@ public class HttpNewsTest {
 //    /**
 //     * Get News Test
 //     */
-//    @Test
-//    public void GetNewsTest() {
-//        OkHttpClient mOkHttpClient = new OkHttpClient();
-//        Request request = new Request.Builder()
-//                .url("http://localhost:9909/vnews/news/america?start=0&count=5")
-//                .header("Content-Type", "application/json")
-//                .build();
-//        Call call = mOkHttpClient.newCall(request);
-//
-//        try {
-//            Response response = call.execute();
-//            System.out.println(response.body().string());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Test
+    public void GetNewsTest() {
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://localhost:9909/vnews/news/america?start=0&count=5")
+                .header("Content-Type", "application/json")
+                .build();
+        Call call = mOkHttpClient.newCall(request);
+
+        try {
+            Response response = call.execute();
+            System.out.println(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 //
 //    /**
 //     * Get User like News Test
